@@ -1,0 +1,56 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using OAuth;
+using RestSharp.Authenticators.OAuth;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace todoist_red_gate.Controllers
+{
+    [Route("api/[controller]/[Action]")]
+    [ApiController]
+    public class TrelloAuthenticationController : ControllerBase
+    {
+        private const string RequestUrl = "https://trello.com/1/OAuthGetRequestToken";
+        private const string RequestAccessTokenUrl = "https://trello.com/1/OAuthGetAccessToken";
+
+        private const string ConsumerKey = "07e57a8c0ff7205b8202479a1d9ed50d";
+        private const string ConsumerSecret = "1be445cdc1c935e7639a29314f3e17eee5c915ac4e1458f44ffd32dcc7ab248b";
+        private static string TokenSecret { get; set; }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            var client = new OAuthRequest
+            {
+                Method = "GET",
+                Type = OAuthRequestType.RequestToken,
+                SignatureMethod = OAuth.OAuthSignatureMethod.HmacSha1,
+                ConsumerKey = ConsumerKey,
+                ConsumerSecret = ConsumerSecret,
+                RequestUrl = RequestUrl,
+                CallbackUrl = "https://localhost:44395/api/trello/callback"
+            };
+
+            var url = client.RequestUrl + "?" + client.GetAuthorizationQuery();
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            var response = (HttpWebResponse)request.GetResponse();
+
+            using var dataStream = response.GetResponseStream();
+            var reader = new StreamReader(dataStream);
+            var responseFromServer = reader.ReadToEnd();
+
+            // Parse login_url and oauth_token_secret from response
+            var loginUrl = HttpUtility.ParseQueryString(responseFromServer).Get("login_url");
+            TokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
+
+            return Redirect(loginUrl);
+        }
+    }
+}
