@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices;
@@ -92,6 +93,7 @@ namespace todoist_red_gate.Services
         {
             var url = BaseUrl + "/lists/" + idList + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
             var httpResponse = await _client.PutAsync(url, new StringContent(content));
 
             if (!httpResponse.IsSuccessStatusCode)
@@ -99,7 +101,7 @@ namespace todoist_red_gate.Services
                 throw new Exception("Cannot update list");
             }
 
-            var updatedTask = JsonConvert.DeserializeObject<List>(await httpResponse.Content.ReadAsStringAsync());
+            var updatedTask = JsonConvert.DeserializeObject<Models.List>(await httpResponse.Content.ReadAsStringAsync());
             return updatedTask;
         }
     }
