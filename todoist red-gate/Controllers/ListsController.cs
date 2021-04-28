@@ -17,10 +17,10 @@ namespace todoist_red_gate.Controllers
         {
             _listService = listService;
         }
-        [HttpGet()]
-        public async Task<List<Models.List>> GetAllList()
+        [HttpGet("{listId}/board")]
+        public async Task<Models.Board> GetBoard(string listId)
         {
-            var tasks = await _listService.GetAllListssAsync();
+            var tasks = await _listService.GetBoardAListIsOn(listId);
             return tasks;
         }
 
@@ -31,10 +31,17 @@ namespace todoist_red_gate.Controllers
             return task;
         }
 
-        [HttpPost()]
-        public async Task<Models.List> CreateList([FromBody] Models.List listToCreate)
+        [HttpGet("{listId}/cards")]
+        public async Task<List<Models.Card>> GetCards(string listId)
         {
-            return await _listService.CreateListAsync(listToCreate);
+            var tasks = await _listService.GetCardsInAList(listId);
+            return tasks;
+        }
+
+        [HttpPost("{listName}&{idBoard}")]
+        public async Task<Models.List> CreateList(string listName, string idBoard)
+        {
+            return await _listService.CreateListAsync(listName, idBoard);
         }
 
         [HttpPut("{listId}")]
@@ -43,11 +50,10 @@ namespace todoist_red_gate.Controllers
             return await _listService.UpdateListAsync(listToUpdate, listId);
         }
 
-        [HttpDelete("{listId}")]
-        public async Task DeleteList(string listId)
+        [HttpPut("archive/{listId}")]
+        public async Task ArchiveList(string listId)
         {
-            await _listService.DeleteListAsync(listId);
-
+            await _listService.ArchiveAsync(listId);
         }
 
     }

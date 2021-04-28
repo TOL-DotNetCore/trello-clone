@@ -8,12 +8,12 @@ namespace todoist_red_gate.Services
 {
     public interface IListService
     {
-        Task<List<Card>> GetCardsInAList();
+        Task<List<Card>> GetCardsInAList(string idList);
         Task<List> GetListAsync(string id);
-        Task<List<List>> GetAllListssAsync();
+        Task<Board> GetBoardAListIsOn(string listId);
         
-        Task<List> CreateListAsync(List task);
+        Task<List> CreateListAsync(string listName, string idBoard);
         Task<List> UpdateListAsync(List task, string idList);
-        Task DeleteListAsync(string id);
+        Task ArchiveAsync(string id);
     }
 }

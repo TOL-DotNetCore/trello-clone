@@ -28,49 +28,39 @@ namespace todoist_red_gate.Services
         }
 
 
-        public async Task<List> CreateListAsync(List task)
+        public async Task<List> CreateListAsync(string listName, string idBoard)
         {
-            var content = JsonConvert.SerializeObject(task);
-            string url = BaseUrl + "/lists?key=" + AppKey + "&token=" + Token;
-            var httlResponse = await _client.PostAsync(url, new StringContent(content));
+            string url = BaseUrl + "/lists?key=" + AppKey + "&token=" + Token + "&name=" + listName + "&idBoard=" + idBoard;
+            var httlResponse = await _client.PostAsync(url, null);
             if (!httlResponse.IsSuccessStatusCode)
             {
                 throw new Exception("Can not add todo task");
             }
-            var createdTask = JsonConvert.DeserializeObject<List>(await httlResponse.Content.ReadAsStringAsync());
+            var createdTask = JsonConvert.DeserializeObject<Models.List>(await httlResponse.Content.ReadAsStringAsync());
             return createdTask;
         }
 
-        public async Task DeleteListAsync(string id)
+        public async Task ArchiveAsync(string id)
         {
-            string url = BaseUrl + "/lists/";
-            var httpResponse = await _client.DeleteAsync($"{url}{id}");
+            string url = BaseUrl + "/lists/" + id+"/closed?key=" + AppKey + "&token=" + Token + "&value=true";
+            var httpResponse = await _client.PutAsync(url, null);
             if (!httpResponse.IsSuccessStatusCode)
             {
-                throw new Exception("Cannot delete the todo item");
+                throw new Exception("Cannot archive");
             }
         }
 
-        public async Task<List<Models.List>> GetAllListssAsync()
+        public async Task<List<Card>> GetCardsInAList(string idList)
         {
-            string boardId = "60546b95fb979e80fb292663";
-            string url = BaseUrl + "/boards/" + boardId+"/lists?key="+AppKey+"&token=" + Token;
+            string url = BaseUrl + "/lists/" + idList + "/cards?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
-
-            if (!httpResponse.IsSuccessStatusCode)
+            if(!httpResponse.IsSuccessStatusCode)
             {
-                throw new Exception("Cannot retrieve tasks");
+                throw new Exception("Cannot retrieve task");
             }
-
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var tasks = JsonConvert.DeserializeObject<List<Models.List>>(content);
-
-            return tasks;
-        }
-
-        public Task<List<Card>> GetCardsInAList()
-        {
-            throw new NotImplementedException();
+            var res = JsonConvert.DeserializeObject<List<Models.Card>>(content);
+            return res;
         }
 
         public async Task<List> GetListAsync(string idList)
@@ -103,6 +93,19 @@ namespace todoist_red_gate.Services
 
             var updatedTask = JsonConvert.DeserializeObject<Models.List>(await httpResponse.Content.ReadAsStringAsync());
             return updatedTask;
+        }
+
+        public async Task<Board> GetBoardAListIsOn(string listId)
+        {
+            string url = BaseUrl + "/lists/" + listId + "/board?key=" + AppKey + "&token=" + Token;
+            var httpRespone = await _client.GetAsync(url);
+            if(!httpRespone.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpRespone.Content.ReadAsStringAsync();
+            var board = JsonConvert.DeserializeObject<Board>(content);
+            return board;
         }
     }
 }
