@@ -20,8 +20,8 @@ namespace todoist_red_gate.Models
     }
     public class BackgroundImageScaled
     {
-        public int width { get; set; }
-        public int height { get; set; }
+        public double width { get; set; }
+        public double height { get; set; }
         public string url { get; set; }
     }
 

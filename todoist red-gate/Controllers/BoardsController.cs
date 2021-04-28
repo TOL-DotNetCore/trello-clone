@@ -18,6 +18,19 @@ namespace todoist_red_gate.Controllers
             _boardService = boardService;
         }
 
+        [HttpPost("{nameBoard}")]
+        public async Task<Models.Board> CreateBoard(string nameBoard)
+        {
+            return await _boardService.Create(nameBoard);
+        } 
+
+        [HttpGet("{idList}/memberships")]
+        public async Task<List<Models.Membership>> GetMemberships(string idList)
+        {
+            var tasks = await _boardService.GetMemberships(idList);
+            return tasks;
+        }
+
         [HttpGet("{id}")]
         public async Task<Models.Board> Get(string id)
         {
