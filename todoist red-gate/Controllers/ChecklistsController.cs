@@ -33,7 +33,7 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Models.Checklist> Update([FromBody] Models.Label checklistToUpdate, string id)
+        public async Task<Models.Checklist> Update([FromBody] Models.Checklist checklistToUpdate, string id)
         {
             return await _checklistService.Update(id, checklistToUpdate);
         }
