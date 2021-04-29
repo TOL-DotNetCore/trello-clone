@@ -8,7 +8,6 @@ namespace todoist_red_gate.Services
 {
     public interface ICardService
     {
-        Task<List<Card>> GetAllCardsOfListAsync(string listId);
         Task<Card> GetCardAsync(string id);
         Task<Card> CreateCardAsync(Card task, string listId);
         Task<Card> UpdateCardAsync(Card task, string idCard);

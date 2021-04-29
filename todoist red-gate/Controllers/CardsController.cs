@@ -19,34 +19,28 @@ namespace todoist_red_gate.Controllers
         {
             _cardservice = cardservice;
         }
-        [HttpGet("{listId}")]
-        public async Task<List<Models.Card>> GetAllCardOfList(string listId)
-        {
-            var tasks = await _cardservice.GetAllCardsOfListAsync(listId);
-            return tasks;
-        }
 
-        [HttpGet("{cardID}", Name = "GetCard")]
-        public async Task<Models.Card> GetCardById(string id)
+        [HttpGet("{cardId}", Name = "GetCard")]
+        public async Task<Models.Card> GetCardById(string cardId)
         {
-            var task = await _cardservice.GetCardAsync(id);
+            var task = await _cardservice.GetCardAsync(cardId);
             return task;
         }
 
-        [HttpPost()]
-        public async Task<Card> Create_Todo([FromForm] Card cardToCreate, string idList)
+        [HttpPost("idlist={idList}")]
+        public async Task<Card> Create([FromBody] Card cardToCreate, string idList)
         {
-            return await _cardservice.CreateCardAsync(cardToCreate, idList);
+            return await _cardservice.CreateCardAsync(cardToCreate, idList);    
         }
 
         [HttpPut("{cardId}")]
-        public async Task<Card> UpdateCard([FromForm] Card cardToUpdate, string cardId)
+        public async Task<Card> UpdateCard([FromBody] Card cardToUpdate, string cardId)
         {
             return await _cardservice.UpdateCardAsync(cardToUpdate, cardId);
         }
 
         [HttpDelete("{cardId}")]
-        public async Task Delete_Todo(string cardId)
+        public async Task DeleteCard(string cardId)
         {
             await _cardservice.DeleteCardAsync(cardId);
 
