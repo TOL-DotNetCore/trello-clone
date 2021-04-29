@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 
@@ -76,7 +77,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             var url = BaseUrl + "/boards/" + id + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
             _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
-            var httpResponse = await _client.PutAsync(url, new StringContent(content));
+            var httpResponse = await _client.PutAsync(url, new StringContent(content, Encoding.UTF8, "application/json"));
 
             if (!httpResponse.IsSuccessStatusCode)
             {
