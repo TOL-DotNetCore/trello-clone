@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
@@ -11,7 +12,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 {
     public class LabelService : ILabelService
     {
-        private const string BaseUrl = "https://api.trello.com/1/";
+        private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private string AppKey;
         private string Token;
@@ -21,6 +22,19 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             _client = client;
             AppKey = "07e57a8c0ff7205b8202479a1d9ed50d";
             Token = "16a827c827226d35375b00936d65bea64d6c964f8e2e638f87fb9b27143eae7d";
+        }
+
+        public async Task<Label> Create(string idBoard, string name, string color)
+        {
+            string url = BaseUrl + "/labels?key=" + AppKey + "&token=" + Token + "&name=" + name + "&color=" + color + "&idBoard=" + idBoard;
+            var httpResponse = await _client.PostAsync(url, null);
+            if(!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retriece task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var task = JsonConvert.DeserializeObject<Label>(content);
+            return task;
         }
 
         public async Task Delete(string id)
@@ -50,7 +64,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         {
             var url = BaseUrl + "/labels/" + id + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
-            var httpResponse = await _client.PutAsync(url, new StringContent(content));
+            var httpResponse = await _client.PutAsync(url, new StringContent(content, Encoding.UTF8, "application/json"));
 
             if (!httpResponse.IsSuccessStatusCode)
             {

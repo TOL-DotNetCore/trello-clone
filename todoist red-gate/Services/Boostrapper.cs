@@ -17,6 +17,7 @@ namespace todoist_red_gate.Services
             services.AddHttpClient<ILabelService, LabelService>();
             services.AddHttpClient<IChecklistService, ChecklistService>();
             services.AddHttpClient<IBoardService, BoardService>();
+            services.AddHttpClient<IActionService, ActionService>();
         }
     }
 }

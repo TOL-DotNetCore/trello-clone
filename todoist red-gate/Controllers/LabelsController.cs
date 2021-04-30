@@ -35,5 +35,11 @@ namespace todoist_red_gate.Controllers
         {
             await _labelService.Delete(id);
         }
+
+        [HttpPost("idBoard={idBoard}&name={name}&color={color}")]
+        public async Task<Models.Label> Create(string idBoard, string name, string color)
+        {
+            return await _labelService.Create(idBoard, name, color);
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task<Models.Label> Get(string id);
         Task<Models.Label> Update(string id, Models.Label task);
         Task Delete(string id);
+        Task<Models.Label> Create(string idBoard, string name, string color);
     }
 }
