@@ -19,6 +19,7 @@ namespace todoist_red_gate.Services
             services.AddHttpClient<IBoardService, BoardService>();
             services.AddHttpClient<IActionService, ActionService>();
             services.AddHttpClient<IEmojiService, EmojiService> ();
+            services.AddHttpClient<IMemberService, MemberService>();
         }
     }
 }
