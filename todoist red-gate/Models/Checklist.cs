@@ -9,7 +9,7 @@ namespace todoist_red_gate.Models
     {
         public string idChecklist { get; set; }
         public string state { get; set; }
-        public string id { get; set; }
+        public string idCheckItem { get; set; }
         public string name { get; set; }
         public object nameData { get; set; }
         public int pos { get; set; }

@@ -76,5 +76,55 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             var updatedTask = JsonConvert.DeserializeObject<Card>(await httpResponse.Content.ReadAsStringAsync());
             return updatedTask;
         }
+
+
+        //NEED TO FIX
+        public async Task<Models.Action> GetActionOnCard(string cardId)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/actions?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if(!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Models.Action>(content);
+        }
+
+        public async Task<Board> GetBoardCardIsOn(string cardId)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/board?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Models.Board>(content);
+        }
+
+        public async Task<List<CheckItem>> GetCheckItemsOnTheCard(string cardId)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/checkItemStates?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Models.CheckItem>>(content);
+        }
+
+        public async Task<List<Checklist>> GetCheckListsOnTheCard(string cardId)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/checkLists?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Models.Checklist>>(content);
+        }
     }
 }

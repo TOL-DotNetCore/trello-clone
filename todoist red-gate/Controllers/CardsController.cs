@@ -46,5 +46,32 @@ namespace todoist_red_gate.Controllers
 
         }
 
+        [HttpGet("{cardId}/actions")]
+        public async Task<Models.Action> GetACtionOnCard(string cardId)
+        {
+            var task = await _cardservice.GetActionOnCard(cardId);
+            return task;
+        }
+
+        [HttpGet("{cardId}/board")]
+        public async Task<Models.Board> GetBoardCardIsOn(string cardId)
+        {
+            var task = await _cardservice.GetBoardCardIsOn(cardId);
+            return task;
+        }
+
+        [HttpGet("{cardId}/checkitems")]
+        public async Task<List<Models.CheckItem>> GetChekcItemsOnTheCard(string cardId)
+        {
+            var task = await _cardservice.GetCheckItemsOnTheCard(cardId);
+            return task;
+        }
+
+        [HttpGet("{cardId}/checklists")]
+        public async Task<List<Models.Checklist>> GetChekcListsOnTheCard(string cardId)
+        {
+            var task = await _cardservice.GetCheckListsOnTheCard(cardId);
+            return task;
+        }
     }
 }

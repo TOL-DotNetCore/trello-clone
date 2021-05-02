@@ -12,6 +12,11 @@ namespace todoist_red_gate.Services
         Task<Card> CreateCardAsync(Card task, string listId);
         Task<Card> UpdateCardAsync(Card task, string idCard);
         Task DeleteCardAsync(string id);
+        Task<Models.Action> GetActionOnCard(string cardId);
+        Task<Models.Board> GetBoardCardIsOn(string cardId);
+        Task<List<Models.CheckItem>> GetCheckItemsOnTheCard(string cardId);
+        Task<List<Models.Checklist>> GetCheckListsOnTheCard(string cardId);
+
     }
 }
 
