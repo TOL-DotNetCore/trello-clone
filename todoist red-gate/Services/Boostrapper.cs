@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using todoist_red_gate.Services.TrelloServices;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 using todoist_red_gate.Services.TrelloServices.TrelloServices;
 
@@ -21,6 +22,7 @@ namespace todoist_red_gate.Services
             services.AddHttpClient<IEmojiService, EmojiService> ();
             services.AddHttpClient<IMemberService, MemberService>();
             services.AddHttpClient<IOrganizationService, OrganizationService>();
+            services.AddHttpClient<IsearchService, SearchService>();
         }
     }
 }
