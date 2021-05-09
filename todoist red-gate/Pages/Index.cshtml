@@ -7,7 +7,7 @@
 <div class="row">
     @if (!User.Identity.IsAuthenticated)
     {
-        <a asp-action="Login" asp-controller="Trello" class="btn btn-outline-primary">Log In with Trello</a>
+        <a asp-action="login" asp-controller="trelloauthentication" class="btn btn-outline-primary">Log In with Trello</a>
 
     }
     else
