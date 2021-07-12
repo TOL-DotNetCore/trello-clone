@@ -73,5 +73,12 @@ namespace todoist_red_gate.Controllers
             var task = await _cardservice.GetCheckListsOnTheCard(cardId);
             return task;
         }
+
+        [HttpGet("{cardId}/members")]
+        public async Task<List<Models.Member>> GetMembersOfCard(string cardId)
+        {
+            var task = await _cardservice.GetMembersOfCards(cardId);
+            return task;
+        }
     }
 }

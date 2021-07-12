@@ -16,6 +16,7 @@ namespace todoist_red_gate.Services
         Task<Models.Board> GetBoardCardIsOn(string cardId);
         Task<List<Models.CheckItem>> GetCheckItemsOnTheCard(string cardId);
         Task<List<Models.Checklist>> GetCheckListsOnTheCard(string cardId);
+        Task<List<Member>> GetMembersOfCards(string cardId);
 
     }
 }

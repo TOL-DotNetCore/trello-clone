@@ -12,5 +12,6 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task Delete(string id);
         Task<List<Models.Membership>> GetMemberships(string idBoard);
         Task<Models.Board> Create(string nameBoard);
+        Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId);
     }
 }

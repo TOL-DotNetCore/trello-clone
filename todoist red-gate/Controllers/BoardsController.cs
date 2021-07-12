@@ -49,5 +49,12 @@ namespace todoist_red_gate.Controllers
         {
             await _boardService.Delete(id);
         }
+
+        [HttpGet("{boardId}/cardsdue")]
+        public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId)
+        {
+            var tasks = await _boardService.GetAllCurentDateCardOfBoard(boardId);
+            return tasks;
+        }
     }
 }

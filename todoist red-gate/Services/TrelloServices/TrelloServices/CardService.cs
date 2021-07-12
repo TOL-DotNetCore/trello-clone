@@ -47,7 +47,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Card> GetCardAsync(string id)
+        public async Task<Models.Card> GetCardAsync(string id)
         {
             string url = BaseUrl + "/cards/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -58,7 +58,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
 
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var cardItem = JsonConvert.DeserializeObject<Card>(content);
+            var cardItem = JsonConvert.DeserializeObject<Models.Card>(content);
 
             return cardItem;
         }
@@ -126,5 +126,19 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             var content = await httpResponse.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<Models.Checklist>>(content);
         }
+
+        public async Task<List<Member>> GetMembersOfCards(string cardId)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/members?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if(!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Member>>(content);
+        }
+
+        
     }
 }

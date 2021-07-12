@@ -87,5 +87,25 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             var updatedTask = JsonConvert.DeserializeObject<Models.Board>(await httpResponse.Content.ReadAsStringAsync());
             return updatedTask;
         }
+
+        public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId)
+        {
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "?token=" + Token;
+            var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
+            var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
+
+            List<Models.Card> allCard = null;
+            foreach (var list in listList)
+            {
+                string urlGetCard = BaseUrl + "/lists/" + list + "/cards?key=" + AppKey + "?token=" + Token;
+                var allCardHttpResponse = await _client.GetAsync(urlGetCard);
+                var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent).Where(x => x.due == DateTime.Now);
+                allCard.AddRange(listCard);
+
+            }
+            return allCard;
+        }
     }
 }
