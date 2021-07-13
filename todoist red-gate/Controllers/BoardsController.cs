@@ -56,5 +56,12 @@ namespace todoist_red_gate.Controllers
             var tasks = await _boardService.GetAllCurentDateCardOfBoard(boardId);
             return tasks;
         }
+
+        [HttpGet("{boardId}/cardsdue?start={start}&end={end}")]
+        public async Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end)
+        {
+            var tasks = await _boardService.GetAllCardBetween(boardId, start, end);
+            return tasks;
+        }
     }
 }

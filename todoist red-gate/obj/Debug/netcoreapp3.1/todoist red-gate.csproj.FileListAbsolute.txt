@@ -5,3 +5,37 @@ E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist re
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.MvcApplicationPartsAssemblyInfo.cache
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.RazorAssemblyInfo.cache
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.RazorAssemblyInfo.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\appsettings.Development.json
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\appsettings.json
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.exe
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.deps.json
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.runtimeconfig.json
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.runtimeconfig.dev.json
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.pdb
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.Views.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\todoist red-gate.Views.pdb
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\OAuth.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Octokit.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\RestSharp.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\staticwebassets\todoist red-gate.StaticWebAssets.Manifest.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\staticwebassets\todoist red-gate.StaticWebAssets.xml
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\scopedcss\bundle\todoist red-gate.styles.css
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.TagHelpers.input.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.TagHelpers.output.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.RazorCoreGenerate.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\Privacy.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.RazorTargetAssemblyInfo.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.RazorTargetAssemblyInfo.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.Views.pdb
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.csproj.CopyComplete
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.pdb
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.genruntimeconfig.cache
