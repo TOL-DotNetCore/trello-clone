@@ -1,4 +1,3 @@
-E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.csprojAssemblyReference.cache
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.AssemblyInfoInputs.cache
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.AssemblyInfo.cs
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.csproj.CoreCompileInputs.cache
@@ -39,3 +38,4 @@ E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist re
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.dll
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.pdb
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.genruntimeconfig.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\todoist red-gate.csprojAssemblyReference.cache

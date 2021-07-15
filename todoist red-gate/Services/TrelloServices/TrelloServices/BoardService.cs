@@ -27,7 +27,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         {
             string url = BaseUrl + "/boards/?key=" + AppKey + "&token=" + Token + "&name=" + nameBoard;
             var httpResponse = await _client.PostAsync(url, null);
-            if(!httpResponse.IsSuccessStatusCode)
+            if (!httpResponse.IsSuccessStatusCode)
             {
                 throw new Exception("Cannot retrieve task");
             }
@@ -63,7 +63,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         {
             string url = BaseUrl + "/boards/" + idBoard + "/memberships?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
-            if(!httpResponse.IsSuccessStatusCode)
+            if (!httpResponse.IsSuccessStatusCode)
             {
                 throw new Exception("Cannot retrieve task");
             }
@@ -90,38 +90,47 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
         public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId)
         {
-            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "?token=" + Token;
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            if(!allListHttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot get lists");
+            }
             var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
             var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
 
-            List<Models.Card> allCard = null;
+            List<Models.Card> allCard = new List<Models.Card>();
             foreach (var list in listList)
             {
-                string urlGetCard = BaseUrl + "/lists/" + list + "/cards?key=" + AppKey + "?token=" + Token;
+                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
                 var allCardHttpResponse = await _client.GetAsync(urlGetCard);
                 var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
-                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent).Where(x => x.due == DateTime.Now);
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent)
+                    .Where(x=>x.due != null).Where(x=>DateTime.Compare((DateTime)(x.due).Value.Date, DateTime.Now.Date) == 0);
                 allCard.AddRange(listCard);
-
             }
             return allCard;
         }
 
         public async Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end)
         {
-            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "?token=" + Token;
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            if (!allListHttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot get lists");
+            }
             var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
             var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
 
-            List<Models.Card> allCard = null;
+            List<Models.Card> allCard = new List<Models.Card>();
             foreach (var list in listList)
             {
-                string urlGetCard = BaseUrl + "/lists/" + list + "/cards?key=" + AppKey + "?token=" + Token;
+                string urlGetCard = BaseUrl + "/lists/" + list + "/cards?key=" + AppKey + "&token=" + Token;
                 var allCardHttpResponse = await _client.GetAsync(urlGetCard);
                 var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
-                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent).Where(x => x.due >= start && x.due <= end);
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent)
+                    .Where(x => x.due != null).Where(x => ((DateTime.Compare((DateTime)(x.due).Value.Date, start.Date) >= 0) || DateTime.Compare((DateTime)(x.due).Value.Date, end.Date) <= 0));
                 allCard.AddRange(listCard);
 
             }
