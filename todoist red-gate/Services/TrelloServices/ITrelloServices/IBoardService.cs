@@ -14,5 +14,8 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task<Models.Board> Create(string nameBoard);
         Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId);
         Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end);
+        Task<Models.WeekSumary> GetSumaryOfWeek(string boardId);
+        Task<List<Models.Card>> GetCardsUnfinished(string boardId);
+        Task<List<Models.Card>> GetCardsUnfinished(string boardId, DateTime start, DateTime end);
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 
 namespace todoist_red_gate.Controllers
@@ -22,7 +23,7 @@ namespace todoist_red_gate.Controllers
         public async Task<Models.Board> CreateBoard(string nameBoard)
         {
             return await _boardService.Create(nameBoard);
-        } 
+        }
 
         [HttpGet("{idList}/memberships")]
         public async Task<List<Models.Membership>> GetMemberships(string idList)
@@ -63,5 +64,28 @@ namespace todoist_red_gate.Controllers
             var tasks = await _boardService.GetAllCardBetween(boardId, start.ToUniversalTime(), end.ToUniversalTime());
             return tasks;
         }
+
+        //https://localhost:44395/api/boards/6089796c27952b1ac618b338/weeksumary
+        [HttpGet("{boardId}/weeksumary")]
+        public async Task<WeekSumary> GetSumaryOfWeek(string boardId)
+        {
+            var task = await _boardService.GetSumaryOfWeek(boardId);
+            return task;
+        }
+
+        [HttpGet("{boardId}/unfinishedcurrentday")]
+        public async Task<List<Models.Card>> GetAllCardsUnfinished(string boardId)
+        {
+            var tasks = await _boardService.GetCardsUnfinished(boardId);
+            return tasks;
+        }
+
+        [HttpGet("{boardId}/unfinished")]
+        public async Task<List<Models.Card>> GetAllCardsUnfinished(string boardId, DateTime start, DateTime end)
+        {
+            var tasks = await _boardService.GetCardsUnfinished(boardId, start, end);
+            return tasks;
+        }
+
     }
 }

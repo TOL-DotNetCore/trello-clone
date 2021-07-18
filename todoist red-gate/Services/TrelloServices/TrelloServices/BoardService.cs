@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 
 namespace todoist_red_gate.Services.TrelloServices.TrelloServices
@@ -88,6 +89,10 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return updatedTask;
         }
 
+        // Get actions on a card
+
+
+        // Custom API
         public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
@@ -133,6 +138,100 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
                 listCard = listCard.Where(x => x.due != null).Where(x => x.due >= start && x.due <= end).ToList();
                 allCard.AddRange(listCard);
 
+            }
+            return allCard;
+        }
+
+        // Week sumary, get list cards had complete, get list cards un finished
+        public async Task<Models.WeekSumary> GetSumaryOfWeek(string boardId)
+        {
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
+            var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            if (!allListHttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot get lists");
+            }
+            var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
+            var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
+
+            List<Models.Card> cardsComplete = new List<Models.Card>();
+            List<Models.Card> cardsUnfinished = new List<Models.Card>();
+            WeekSumary res = new WeekSumary();
+            foreach (var list in listList)
+            {
+                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
+                var allCardHttpResponse = await _client.GetAsync(urlGetCard);
+                var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent);
+                List<Models.Card> listCardCom = new List<Models.Card>();
+                List<Models.Card> listCardUnf = new List<Models.Card>();
+                if (list.name.Equals("Done"))
+                {
+                    listCardCom = listCard.ToList();
+                    res.AddCardComplete(listCardCom);
+                }
+                listCardUnf = listCard.Where(x => x.due != null)
+                        .Where(x => x.due < DateTime.Now).ToList();
+                res.AddCardUnfinished(listCardUnf);
+
+            }
+            return res;
+        }
+
+        // Get all cards unfinished of the board
+
+        public async Task<List<Card>> GetCardsUnfinished(string boardId)
+        {
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
+            var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            if (!allListHttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot get lists");
+            }
+            var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
+            var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
+
+            List<Models.Card> allCard = new List<Models.Card>();
+            foreach (var list in listList)
+            {
+                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
+                var allCardHttpResponse = await _client.GetAsync(urlGetCard);
+                var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent);
+                if (!list.name.Equals("Done"))
+                {
+                    listCard = listCard.Where(x => x.due < DateTime.Now).ToList();
+                    allCard.AddRange(listCard);
+                }
+
+            }
+            return allCard;
+        }
+
+        // Get all cards unfinished of the board from start date to end date
+        public async Task<List<Card>> GetCardsUnfinished(string boardId, DateTime start, DateTime end)
+        {
+            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
+            var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            if (!allListHttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot get lists");
+            }
+            var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
+            var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
+
+            List<Models.Card> allCard = new List<Models.Card>();
+            foreach (var list in listList)
+            {
+                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
+                var allCardHttpResponse = await _client.GetAsync(urlGetCard);
+                var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent);
+                if (!list.name.Equals("Done"))
+                {
+                    listCard = listCard.Where(x => x.due != null).Where(x => x.due >= start && x.due <= end).ToList();
+                    allCard.AddRange(listCard);
+                }
             }
             return allCard;
         }
