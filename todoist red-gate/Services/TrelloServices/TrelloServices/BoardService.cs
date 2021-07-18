@@ -126,11 +126,11 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             List<Models.Card> allCard = new List<Models.Card>();
             foreach (var list in listList)
             {
-                string urlGetCard = BaseUrl + "/lists/" + list + "/cards?key=" + AppKey + "&token=" + Token;
+                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
                 var allCardHttpResponse = await _client.GetAsync(urlGetCard);
                 var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
-                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent)
-                    .Where(x => x.due != null).Where(x => ((DateTime.Compare((DateTime)(x.due).Value.Date, start.Date) >= 0) || DateTime.Compare((DateTime)(x.due).Value.Date, end.Date) <= 0));
+                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent);
+                listCard = listCard.Where(x => x.due != null).Where(x => x.due >= start && x.due <= end).ToList();
                 allCard.AddRange(listCard);
 
             }
