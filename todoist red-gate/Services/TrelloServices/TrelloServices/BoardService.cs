@@ -235,5 +235,18 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
             return allCard;
         }
+
+        public async Task<List<List>> GetListsOnBoard(string boardId)
+        {
+            string url = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var tasks = JsonConvert.DeserializeObject<List<Models.List>>(content);
+            return tasks;
+        }
     }
 }

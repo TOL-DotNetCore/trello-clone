@@ -17,5 +17,6 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task<Models.WeekSumary> GetSumaryOfWeek(string boardId);
         Task<List<Models.Card>> GetCardsUnfinished(string boardId);
         Task<List<Models.Card>> GetCardsUnfinished(string boardId, DateTime start, DateTime end);
+        Task<List<Models.List>> GetListsOnBoard(string boardId);
     }
 }
