@@ -32,6 +32,16 @@ namespace todoist_red_gate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyHeader()
+                                       .AllowAnyOrigin()
+                                      .AllowAnyMethod();
+                    });
+            });
             services.AddRazorPages();
             services.AddControllers();
             services.UseServices();
@@ -48,6 +58,7 @@ namespace todoist_red_gate
             {
                 app.UseExceptionHandler("/Error");
             }
+            app.UseCors("AllOrigins");
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
