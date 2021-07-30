@@ -50,7 +50,7 @@ namespace todoist_red_gate.Controllers
             return await _listService.UpdateListAsync(listToUpdate, listId);
         }
 
-        [HttpPut("archive/{listId}")]
+        [HttpPut("{listId}/archive")]
         public async Task ArchiveList(string listId)
         {
             await _listService.ArchiveAsync(listId);

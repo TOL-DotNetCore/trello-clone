@@ -83,8 +83,9 @@ namespace todoist_red_gate.Services
         {
             var url = BaseUrl + "/lists/" + idList + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
-            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
-            var httpResponse = await _client.PutAsync(url, new StringContent(content));
+            var stringContent = new StringContent(content, UnicodeEncoding.UTF8, "application/json");
+            //_client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer");
+            var httpResponse = await _client.PutAsync(url, stringContent);
 
             if (!httpResponse.IsSuccessStatusCode)
             {
