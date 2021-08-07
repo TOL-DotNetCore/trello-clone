@@ -35,7 +35,7 @@ namespace todoist_red_gate.Controllers
                 ConsumerKey = ConsumerKey,
                 ConsumerSecret = ConsumerSecret,
                 RequestUrl = RequestUrl,
-                CallbackUrl = "https://localhost:44395/api/trello/callback"
+                CallbackUrl = "https://localhost:44395/api/trelloauthentication/callback"
             };
 
             var url = client.RequestUrl + "?" + client.GetAuthorizationQuery();

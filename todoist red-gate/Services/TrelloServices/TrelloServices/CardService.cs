@@ -29,12 +29,12 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
             var content = JsonConvert.SerializeObject(task);
             string url = BaseUrl + "/cards?key=" + AppKey + "&token=" + Token + "&idList=" + idList;
-            var httlResponse = await _client.PostAsync(url, new StringContent(content , Encoding.UTF8, "application/json"));
-            if (!httlResponse.IsSuccessStatusCode)
+            var httpResponse = await _client.PostAsync(url, new StringContent(content, Encoding.UTF8, "application/json"));
+            if (!httpResponse.IsSuccessStatusCode)
             {
-                throw new Exception("Can not add card");
+                throw new Exception("Can not add card " + httpResponse.StatusCode);
             }
-            var createdTask = JsonConvert.DeserializeObject<Card>(await httlResponse.Content.ReadAsStringAsync());
+            var createdTask = JsonConvert.DeserializeObject<Card>(await httpResponse.Content.ReadAsStringAsync());
             return createdTask;
         }
         public async Task DeleteCardAsync(string id)
