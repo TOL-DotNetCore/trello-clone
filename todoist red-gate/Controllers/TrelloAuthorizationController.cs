@@ -18,9 +18,18 @@ namespace todoist_red_gate.Controllers
     {
         private const string RequestUrl = "https://trello.com/1/OAuthGetRequestToken";
         private const string RequestAccessTokenUrl = "https://trello.com/1/OAuthGetAccessToken";
+        private readonly IConfiguration _config;
 
-        private const string ConsumerKey = "07e57a8c0ff7205b8202479a1d9ed50d";
-        private const string ConsumerSecret = "1be445cdc1c935e7639a29314f3e17eee5c915ac4e1458f44ffd32dcc7ab248b";
+        private readonly string ConsumerKey;
+        private readonly string ConsumerSecret;
+
+        public TrelloAuthorizationController(IConfiguration config)
+        {
+            _config = config;
+            ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
+            ConsumerSecret = _config.GetValue<string>("Trello:ConsumerSecret");
+        }
+
         private static string TokenSecret { get; set; }
 
         [HttpGet]
