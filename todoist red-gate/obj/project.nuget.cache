@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "upxjlYOwkZQ/ht16NGStpONfOq3LXB71/Gtb+bLIC1XEkHtbBIeD1xXbJi/XybwEza7uKyie7UwcivBF6kE3EQ==",
+  "dgSpecHash": "80ZY5EhbCVxMLUrmDBNLrAy0oABLS28KYgT5FJTohhiFENzOMJx58NvpaWPLlpqdY5zj/9cE9d+++B4Y5LQFjA==",
   "success": true,
   "projectFilePath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\trello-clone.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jack\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\jack\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\jack\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\jack\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512"
+    "C:\\Users\\jack\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512",
+    "C:\\Users\\jack\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.5\\swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
+    "C:\\Users\\jack\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.5\\swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
+    "C:\\Users\\jack\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.5\\swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
+    "C:\\Users\\jack\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.5\\swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512"
   ],
   "logs": []
 }

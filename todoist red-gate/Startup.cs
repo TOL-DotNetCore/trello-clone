@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,11 @@ namespace todoist_red_gate
             });
             services.AddRazorPages();
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Trello Clone", Version = "v1" });
+            });
+
             services.UseServices();
         }
 
@@ -62,6 +68,12 @@ namespace todoist_red_gate
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Trello Clone V1");
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

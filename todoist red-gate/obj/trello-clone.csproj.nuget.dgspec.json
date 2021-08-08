@@ -47,6 +47,10 @@
             "OAuth.DotNetCore": {
               "target": "Package",
               "version": "[3.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.1.5, )"
             }
           },
           "imports": [

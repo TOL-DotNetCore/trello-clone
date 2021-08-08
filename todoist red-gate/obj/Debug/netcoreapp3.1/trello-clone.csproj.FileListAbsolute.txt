@@ -37,3 +37,8 @@ E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clo
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.dll
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.pdb
 E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.genruntimeconfig.cache
+E:\.NET\API\todoist red-gate\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.MvcApplicationPartsAssemblyInfo.cs
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\.NET\API\todoist red-gate\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
