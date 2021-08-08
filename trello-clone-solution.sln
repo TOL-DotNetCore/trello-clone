@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "todoist red-gate", "todoist red-gate\todoist red-gate.csproj", "{0D516CE4-FC5B-4973-8E3B-28D3AED1A96A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trello-clone", "todoist red-gate\trello-clone.csproj", "{0D516CE4-FC5B-4973-8E3B-28D3AED1A96A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2DB7AB7D-AF87-4F3F-A1E8-840B78FE35C8}"
 	ProjectSection(SolutionItems) = preProject

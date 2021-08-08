@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using OAuth;
-using RestSharp.Authenticators.OAuth;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,7 +38,7 @@ namespace todoist_red_gate.Controllers
             };
 
             var url = client.RequestUrl + "?" + client.GetAuthorizationQuery();
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);  
             var response = (HttpWebResponse)request.GetResponse();
 
             using var dataStream = response.GetResponseStream();
@@ -47,14 +46,14 @@ namespace todoist_red_gate.Controllers
             var responseFromServer = reader.ReadToEnd();
 
             // Parse login_url and oauth_token_secret from response
-            var loginUrl = HttpUtility.ParseQueryString(responseFromServer).Get("login_url");
+            var OauthToken = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token");
             TokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
 
-            return Redirect(loginUrl);
+            return Redirect("https://trello.com/1/OAuthAuthorizeToken?oauth_token=" + OauthToken);
         }
 
-        private static string OAuthToken { get; set; }
-        private static string OAuthTokenSecret { get; set; }
+        public static string OAuthToken { get; set; }
+        public static string OAuthTokenSecret { get; set; }
         [HttpGet]
         public IActionResult Callback()
         {
@@ -89,7 +88,7 @@ namespace todoist_red_gate.Controllers
             OAuthToken = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token");
             OAuthTokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
 
-            return Ok();
+            return Ok("Login success!");
         }
     }
 }
