@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
+using todoist_red_gate.Controllers;
 using todoist_red_gate.Models;
 
 namespace todoist_red_gate.Services.TrelloServices.TrelloServices
@@ -15,26 +17,25 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
-        private IConfiguration _iConfig;
         private string AppKey;
         private string Token;
         public CardService(HttpClient client)
         {
             _client = client;
             AppKey = "07e57a8c0ff7205b8202479a1d9ed50d";
-            Token = "16a827c827226d35375b00936d65bea64d6c964f8e2e638f87fb9b27143eae7d";
+            Token = TrelloAuthenticationController.OAuthToken;
         }
         public async Task<Card> CreateCardAsync(Card task, string idList)
         {
 
             var content = JsonConvert.SerializeObject(task);
             string url = BaseUrl + "/cards?key=" + AppKey + "&token=" + Token + "&idList=" + idList;
-            var httlResponse = await _client.PostAsync(url, new StringContent(content , Encoding.UTF8, "application/json"));
-            if (!httlResponse.IsSuccessStatusCode)
+            var httpResponse = await _client.PostAsync(url, new StringContent(content, Encoding.UTF8, "application/json"));
+            if (!httpResponse.IsSuccessStatusCode)
             {
-                throw new Exception("Can not add card");
+                throw new Exception("Can not add card " + httpResponse.StatusCode);
             }
-            var createdTask = JsonConvert.DeserializeObject<Card>(await httlResponse.Content.ReadAsStringAsync());
+            var createdTask = JsonConvert.DeserializeObject<Card>(await httpResponse.Content.ReadAsStringAsync());
             return createdTask;
         }
         public async Task DeleteCardAsync(string id)

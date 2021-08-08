@@ -27,10 +27,11 @@ namespace todoist_red_gate.Controllers
             return task;
         }
 
-        [HttpPost("idlist={idList}")]
-        public async Task<Card> Create([FromBody] Card cardToCreate, string idList)
+        [HttpPost("listId={idList}")]
+        public async Task<Models.Card> Create([FromBody] Card cardToCreate, string idList)
         {
-            return await _cardservice.CreateCardAsync(cardToCreate, idList);    
+            var task = await _cardservice.CreateCardAsync(cardToCreate, idList);
+            return task;
         }
 
         [HttpPut("{cardId}")]

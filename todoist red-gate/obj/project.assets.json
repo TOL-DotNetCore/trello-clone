@@ -11,31 +11,13 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OAuth/1.0.3": {
+      "OAuth.DotNetCore/3.0.1": {
         "type": "package",
         "compile": {
-          "lib/net40/OAuth.dll": {}
+          "lib/netstandard2.0/OAuth.dll": {}
         },
         "runtime": {
-          "lib/net40/OAuth.dll": {}
-        }
-      },
-      "Octokit/0.50.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Octokit.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Octokit.dll": {}
-        }
-      },
-      "RestSharp/106.11.7": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/RestSharp.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/RestSharp.dll": {}
+          "lib/netstandard2.0/OAuth.dll": {}
         }
       }
     }
@@ -72,72 +54,24 @@
         "packageIcon.png"
       ]
     },
-    "OAuth/1.0.3": {
-      "sha512": "hgYuURGgXcAmxg8Xn/wIlI85eCy4UuxujmR04uXpDQjUwFfgT25eM+j1FerJwI9FK+K8Mr1ViNXP4Vm9BsxW7A==",
+    "OAuth.DotNetCore/3.0.1": {
+      "sha512": "odOVMFAIIBruZh1XlLdr7QekRYjqEzhpvcRDbObPwfqTqob+/H6mlsXaTzJ/djCzBOtywHghJtPBietPqzP9rA==",
       "type": "package",
-      "path": "oauth/1.0.3",
+      "path": "oauth.dotnetcore/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE",
-        "lib/net20/OAuth.Net20.dll",
-        "lib/net20/OAuth.Net20.pdb",
-        "lib/net20/OAuth.Net20.xml",
-        "lib/net35/OAuth.Net35.dll",
-        "lib/net35/OAuth.Net35.pdb",
-        "lib/net35/OAuth.Net35.xml",
         "lib/net40/OAuth.dll",
-        "lib/net40/OAuth.pdb",
-        "lib/net40/OAuth.xml",
-        "lib/sl4-wp/OAuth.WindowsPhone.dll",
-        "lib/sl4-wp/OAuth.WindowsPhone.pdb",
-        "lib/sl4-wp/OAuth.WindowsPhone.xml",
-        "lib/sl4-wp71/OAuth.WindowsPhone.Mango.XML",
-        "lib/sl4-wp71/OAuth.WindowsPhone.Mango.dll",
-        "lib/sl4-wp71/OAuth.WindowsPhone.Mango.pdb",
-        "oauth.1.0.3.nupkg.sha512",
-        "oauth.nuspec"
-      ]
-    },
-    "Octokit/0.50.0": {
-      "sha512": "J5vqespSvjxIAAtjG1Tc6ghBqyfRgDJtKnk/ifi4N0hD/f3JbPwyEDRT+Eelu/bS4C4M6mu5gt1WJqar+fByzg==",
-      "type": "package",
-      "path": "octokit/0.50.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net46/Octokit.dll",
-        "lib/net46/Octokit.xml",
-        "lib/netstandard2.0/Octokit.dll",
-        "lib/netstandard2.0/Octokit.xml",
-        "octokit.0.50.0.nupkg.sha512",
-        "octokit.nuspec",
-        "octokit.png"
-      ]
-    },
-    "RestSharp/106.11.7": {
-      "sha512": "NzndH096CTulvq+ihr7u1mBJ29oukdi9A8bypQJk+kaHxbRzTTrtgsEEQAb04ptTUZmQa7cgo7uF5z7NuEPX1Q==",
-      "type": "package",
-      "path": "restsharp/106.11.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net452/RestSharp.dll",
-        "lib/net452/RestSharp.xml",
-        "lib/netstandard2.0/RestSharp.dll",
-        "lib/netstandard2.0/RestSharp.xml",
-        "restsharp.106.11.7.nupkg.sha512",
-        "restsharp.nuspec",
-        "restsharp.png"
+        "lib/netstandard2.0/OAuth.dll",
+        "oauth.dotnetcore.3.0.1.nupkg.sha512",
+        "oauth.dotnetcore.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Newtonsoft.Json >= 12.0.3",
-      "OAuth >= 1.0.3",
-      "Octokit >= 0.50.0",
-      "RestSharp >= 106.11.7"
+      "OAuth.DotNetCore >= 3.0.1"
     ]
   },
   "packageFolders": {
@@ -146,9 +80,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\todoist red-gate.csproj",
-      "projectName": "todoist red-gate",
-      "projectPath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\todoist red-gate.csproj",
+      "projectUniqueName": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\trello-clone.csproj",
+      "projectName": "trello-clone",
+      "projectPath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\trello-clone.csproj",
       "packagesPath": "C:\\Users\\jack\\.nuget\\packages\\",
       "outputPath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\obj\\",
       "projectStyle": "PackageReference",
@@ -183,17 +117,9 @@
             "target": "Package",
             "version": "[12.0.3, )"
           },
-          "OAuth": {
+          "OAuth.DotNetCore": {
             "target": "Package",
-            "version": "[1.0.3, )"
-          },
-          "Octokit": {
-            "target": "Package",
-            "version": "[0.50.0, )"
-          },
-          "RestSharp": {
-            "target": "Package",
-            "version": "[106.11.7, )"
+            "version": "[3.0.1, )"
           }
         },
         "imports": [
@@ -217,17 +143,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'OAuth 1.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "OAuth",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }
