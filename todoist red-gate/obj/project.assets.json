@@ -268,11 +268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\trello-clone.csproj",
+      "projectUniqueName": "E:\\.NET\\API\\trello-clone-solution\\todoist red-gate\\trello-clone.csproj",
       "projectName": "trello-clone",
-      "projectPath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\trello-clone.csproj",
+      "projectPath": "E:\\.NET\\API\\trello-clone-solution\\todoist red-gate\\trello-clone.csproj",
       "packagesPath": "C:\\Users\\jack\\.nuget\\packages\\",
-      "outputPath": "E:\\.NET\\API\\todoist red-gate\\todoist red-gate\\obj\\",
+      "outputPath": "E:\\.NET\\API\\trello-clone-solution\\todoist red-gate\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jack\\AppData\\Roaming\\NuGet\\NuGet.Config",

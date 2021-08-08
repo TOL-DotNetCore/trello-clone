@@ -17,15 +17,16 @@ namespace todoist_red_gate.Services
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
-        private IConfiguration _iConfig;
-        private string AppKey;
-        private string Token;
-        public ListService(HttpClient client, IConfiguration iConfig)
+        private readonly string AppKey;
+        private readonly string Token;
+        private readonly IConfiguration _config;
+        public ListService(HttpClient client, IConfiguration config)
         {
             _client = client;
-            _iConfig = iConfig;
-            AppKey = "07e57a8c0ff7205b8202479a1d9ed50d";
-            Token = TrelloAuthenticationController.OAuthToken;
+            _config = config;
+            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
+            AppKey = ConsumerKey;
+            Token = TrelloAuthorizationController.OAuthToken;
         }
 
 

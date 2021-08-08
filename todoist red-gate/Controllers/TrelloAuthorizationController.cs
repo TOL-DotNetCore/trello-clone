@@ -14,7 +14,7 @@ namespace todoist_red_gate.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class TrelloAuthenticationController : ControllerBase
+    public class TrelloAuthorizationController : ControllerBase
     {
         private const string RequestUrl = "https://trello.com/1/OAuthGetRequestToken";
         private const string RequestAccessTokenUrl = "https://trello.com/1/OAuthGetAccessToken";
@@ -34,7 +34,7 @@ namespace todoist_red_gate.Controllers
                 ConsumerKey = ConsumerKey,
                 ConsumerSecret = ConsumerSecret,
                 RequestUrl = RequestUrl,
-                CallbackUrl = "https://localhost:44395/api/trelloauthentication/callback"
+                CallbackUrl = "https://localhost:44395/api/trelloauthorization/callback"
             };
 
             var url = client.RequestUrl + "?" + client.GetAuthorizationQuery();

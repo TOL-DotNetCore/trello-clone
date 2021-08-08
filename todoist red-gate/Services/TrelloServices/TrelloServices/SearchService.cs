@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,16 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
-        private string AppKey;
-        private string Token;
-        public SearchService(HttpClient client)
+        private readonly string AppKey;
+        private readonly string Token;
+        private readonly IConfiguration _config;
+        public SearchService(HttpClient client, IConfiguration config)
         {
+            _config = config;
             _client = client;
-            AppKey = "07e57a8c0ff7205b8202479a1d9ed50d";
-            Token = TrelloAuthenticationController.OAuthToken;
+            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
+            AppKey = ConsumerKey;
+            Token = TrelloAuthorizationController.OAuthToken;
         }
         public async Task<List<Member>> SearchMember(string query)
         {
