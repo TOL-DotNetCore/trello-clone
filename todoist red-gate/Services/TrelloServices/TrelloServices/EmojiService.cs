@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,17 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
-        private string AppKey;
-        private string Token;
+        private readonly string AppKey;
+        private readonly string Token;
+        private readonly IConfiguration _config;
 
-        public EmojiService(HttpClient client)
+        public EmojiService(HttpClient client, IConfiguration config)
         {
+            _config = config;
             _client = client;
-            AppKey = "07e57a8c0ff7205b8202479a1d9ed50d";
-            Token = TrelloAuthenticationController.OAuthToken;
+            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
+            AppKey = ConsumerKey;
+            Token = TrelloAuthorizationController.OAuthToken;
         }
 
         public async Task<Models.Emoji> GetAll()
