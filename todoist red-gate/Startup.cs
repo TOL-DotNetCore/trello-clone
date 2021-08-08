@@ -59,6 +59,11 @@ namespace todoist_red_gate
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Trello Clone V1");
+                });
             }
             else
             {

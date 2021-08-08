@@ -22,12 +22,11 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "todoist red-gate/1.0.0": {
+      "trello-clone/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
-          "OAuth": "1.0.3",
-          "Octokit": "0.50.0",
-          "RestSharp": "106.11.7",
+          "OAuth.DotNetCore": "3.0.1",
+          "Swashbuckle.AspNetCore": "6.1.5",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -312,10 +311,22 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "todoist red-gate.dll": {}
+          "trello-clone.dll": {}
         },
         "compile": {
-          "todoist red-gate.dll": {}
+          "trello-clone.dll": {}
+        }
+      },
+      "Microsoft.Extensions.ApiDescription.Server/3.0.0": {},
+      "Microsoft.OpenApi/1.2.3": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "assemblyVersion": "1.2.3.0",
+            "fileVersion": "1.2.3.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
         }
       },
       "Newtonsoft.Json/12.0.3": {
@@ -329,37 +340,62 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OAuth/1.0.3": {
+      "OAuth.DotNetCore/3.0.1": {
         "runtime": {
-          "lib/net40/OAuth.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+          "lib/netstandard2.0/OAuth.dll": {
+            "assemblyVersion": "3.0.1.0",
+            "fileVersion": "3.0.1.0"
           }
         },
         "compile": {
-          "lib/net40/OAuth.dll": {}
+          "lib/netstandard2.0/OAuth.dll": {}
         }
       },
-      "Octokit/0.50.0": {
-        "runtime": {
-          "lib/netstandard2.0/Octokit.dll": {
-            "assemblyVersion": "0.50.0.0",
-            "fileVersion": "0.50.0.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/Octokit.dll": {}
+      "Swashbuckle.AspNetCore/6.1.5": {
+        "dependencies": {
+          "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
+          "Swashbuckle.AspNetCore.Swagger": "6.1.5",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.1.5",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.1.5"
         }
       },
-      "RestSharp/106.11.7": {
+      "Swashbuckle.AspNetCore.Swagger/6.1.5": {
+        "dependencies": {
+          "Microsoft.OpenApi": "1.2.3"
+        },
         "runtime": {
-          "lib/netstandard2.0/RestSharp.dll": {
-            "assemblyVersion": "106.11.7.0",
-            "fileVersion": "106.11.7.0"
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Swagger.dll": {
+            "assemblyVersion": "6.1.5.0",
+            "fileVersion": "6.1.5.0"
           }
         },
         "compile": {
-          "lib/netstandard2.0/RestSharp.dll": {}
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Swagger.dll": {}
+        }
+      },
+      "Swashbuckle.AspNetCore.SwaggerGen/6.1.5": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.Swagger": "6.1.5"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
+            "assemblyVersion": "6.1.5.0",
+            "fileVersion": "6.1.5.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
+        }
+      },
+      "Swashbuckle.AspNetCore.SwaggerUI/6.1.5": {
+        "runtime": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {
+            "assemblyVersion": "6.1.5.0",
+            "fileVersion": "6.1.5.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -2057,10 +2093,24 @@
     }
   },
   "libraries": {
-    "todoist red-gate/1.0.0": {
+    "trello-clone/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LH4OE/76F6sOCslif7+Xh3fS/wUUrE5ryeXAMcoCnuwOQGT5Smw0p57IgDh/pHgHaGz/e+AmEQb7pRgb++wt0w==",
+      "path": "microsoft.extensions.apidescription.server/3.0.0",
+      "hashPath": "microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512"
+    },
+    "Microsoft.OpenApi/1.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
+      "path": "microsoft.openapi/1.2.3",
+      "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
     },
     "Newtonsoft.Json/12.0.3": {
       "type": "package",
@@ -2069,26 +2119,40 @@
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
-    "OAuth/1.0.3": {
+    "OAuth.DotNetCore/3.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hgYuURGgXcAmxg8Xn/wIlI85eCy4UuxujmR04uXpDQjUwFfgT25eM+j1FerJwI9FK+K8Mr1ViNXP4Vm9BsxW7A==",
-      "path": "oauth/1.0.3",
-      "hashPath": "oauth.1.0.3.nupkg.sha512"
+      "sha512": "sha512-odOVMFAIIBruZh1XlLdr7QekRYjqEzhpvcRDbObPwfqTqob+/H6mlsXaTzJ/djCzBOtywHghJtPBietPqzP9rA==",
+      "path": "oauth.dotnetcore/3.0.1",
+      "hashPath": "oauth.dotnetcore.3.0.1.nupkg.sha512"
     },
-    "Octokit/0.50.0": {
+    "Swashbuckle.AspNetCore/6.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-J5vqespSvjxIAAtjG1Tc6ghBqyfRgDJtKnk/ifi4N0hD/f3JbPwyEDRT+Eelu/bS4C4M6mu5gt1WJqar+fByzg==",
-      "path": "octokit/0.50.0",
-      "hashPath": "octokit.0.50.0.nupkg.sha512"
+      "sha512": "sha512-AFiomCan3c3twBr3q/0P0YECN+AtJEKASjtRybbKlFyqSyENrwj8Q3JmPQ7knyp7Z2TzbhZ+ZccA3eXpGcD97g==",
+      "path": "swashbuckle.aspnetcore/6.1.5",
+      "hashPath": "swashbuckle.aspnetcore.6.1.5.nupkg.sha512"
     },
-    "RestSharp/106.11.7": {
+    "Swashbuckle.AspNetCore.Swagger/6.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NzndH096CTulvq+ihr7u1mBJ29oukdi9A8bypQJk+kaHxbRzTTrtgsEEQAb04ptTUZmQa7cgo7uF5z7NuEPX1Q==",
-      "path": "restsharp/106.11.7",
-      "hashPath": "restsharp.106.11.7.nupkg.sha512"
+      "sha512": "sha512-Wp8FlwNCKR/DfxvEkjQdru0l7aUp4/5VLEvejCA8t/SMMcUTP+xw4zvyEjGCBoJ/ETqzQM3y+72iYaEOhBlYOw==",
+      "path": "swashbuckle.aspnetcore.swagger/6.1.5",
+      "hashPath": "swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.SwaggerGen/6.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-16M5iJN+hzykkH/vEm4V+47rh8r8KNCOSkIWvP9/+krH3hqVjMlhuop8Xzq6IXckmpXLwxoylLBpiSG9Yy2UUQ==",
+      "path": "swashbuckle.aspnetcore.swaggergen/6.1.5",
+      "hashPath": "swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.SwaggerUI/6.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/YwEGAdkDK8rEPSuPURNNgJ3mWmtsCI/xnVlWBaM2UDNVTr8wBUO0qhLvHFgrf6NjjjNq6cyO3M7lZMLXcGusw==",
+      "path": "swashbuckle.aspnetcore.swaggerui/6.1.5",
+      "hashPath": "swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",
