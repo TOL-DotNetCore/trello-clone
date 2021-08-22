@@ -97,7 +97,7 @@ namespace todoist_red_gate.Controllers
             OAuthToken = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token");
             OAuthTokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
 
-            return Ok(new { token = OAuthToken});
+            return Ok(new {key = ConsumerKey, token = OAuthToken});
         }
     }
 }
