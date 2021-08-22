@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace todoist_red_gate.Models
 {
-
-    public class Emoji
+    public class AttachmentsByType
     {
-        public List<Trello> trello { get; set; }
+        public Trello trello { get; set; }
     }
 }

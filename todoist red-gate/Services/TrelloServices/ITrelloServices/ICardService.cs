@@ -18,6 +18,12 @@ namespace todoist_red_gate.Services
         Task<List<Models.Checklist>> GetCheckListsOnTheCard(string cardId);
         Task<List<Member>> GetMembersOfCards(string cardId);
 
+        //Attachments
+        Task<List<Attachment>> GetAttachmentsOnACard(string cardId);
+        Task<Attachment> GetAnAttachment(string cardId, string attachmentId);
+        Task<Attachment> CreateAttachment(string cardId, AttachmentCreateRequest request);
+        Task DeleteAttachment(string cardId, string attachmentId);
+
     }
 }
 
