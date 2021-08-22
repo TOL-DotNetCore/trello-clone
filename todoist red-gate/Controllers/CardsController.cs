@@ -13,7 +13,7 @@ namespace todoist_red_gate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CardsController : ControllerBase
     {
         ICardService _cardservice;
@@ -82,6 +82,34 @@ namespace todoist_red_gate.Controllers
         {
             var task = await _cardservice.GetMembersOfCards(cardId);
             return task;
+        }
+
+        // Attachment
+        [HttpGet("{cardId}/attachments")]
+        public async Task<List<Attachment>> GetAttachmentsOnACard(string cardId)
+        {
+            var tasks = await _cardservice.GetAttachmentsOnACard(cardId);
+            return tasks;
+        }
+
+        [HttpGet("{cardId}/attachments/{attachmentId}")]
+        public async Task<Attachment> GetAttachmentsOnACard(string cardId, string attachmentId)
+        {
+            var task = await _cardservice.GetAnAttachment(cardId, attachmentId);
+            return task;
+        }
+
+        [HttpPost("{cardId}/attachments")]
+        public async Task<Attachment> CreateAttachment(string cardId, [FromForm] AttachmentCreateRequest request)
+        {
+            var task = await _cardservice.CreateAttachment(cardId, request);
+            return task;
+        }
+
+        [HttpDelete("{cardId}/attachments/{attachmentId}")]
+        public async Task DeleteAttachment(string cardId, string attachmentId)
+        {
+            await _cardservice.DeleteAttachment(cardId, attachmentId);
         }
     }
 }
