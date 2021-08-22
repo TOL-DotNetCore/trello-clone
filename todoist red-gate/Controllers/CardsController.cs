@@ -13,7 +13,7 @@ namespace todoist_red_gate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CardsController : ControllerBase
     {
         ICardService _cardservice;
