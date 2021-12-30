@@ -58,7 +58,6 @@ E:\.NET\API\trello-clone-solution\todoist red-gate\bin\Debug\netcoreapp3.1\OAuth
 E:\.NET\API\trello-clone-solution\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 E:\.NET\API\trello-clone-solution\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\.NET\API\trello-clone-solution\todoist red-gate\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
-E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.csprojAssemblyReference.cache
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.AssemblyInfoInputs.cache
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.AssemblyInfo.cs
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.csproj.CoreCompileInputs.cache
@@ -86,3 +85,5 @@ E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trell
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.dll
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.pdb
 E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.genruntimeconfig.cache
+E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.csproj.AssemblyReference.cache
+E:\.NET\API\trello-clone-solution\todoist red-gate\obj\Debug\netcoreapp3.1\trello-clone.GeneratedMSBuildEditorConfig.editorconfig
