@@ -168,19 +168,20 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
         public async Task<Attachment> CreateAttachment(string cardId, AttachmentCreateRequest request)
         {
-            var content = JsonConvert.SerializeObject(request);
-            string url = BaseUrl + "/cards/"+cardId+"/attachments?key=" + AppKey + "&token=" + Token;
-            // NEED TO FIX IT
-            var multipartContent = new MultipartFormDataContent();
-            var fileContent = new ByteArrayContent(Convert.ToBase64String(request.file));
-            multipartContent.Add(fileContent, request.name, "upload.jpg");
-            var httpResponse = await _client.PostAsync(url, multipartContent);
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                throw new Exception("Can not add card " + httpResponse.StatusCode);
-            }
-            var createdTask = JsonConvert.DeserializeObject<Attachment>(await httpResponse.Content.ReadAsStringAsync());
-            return createdTask;
+            return new Attachment();
+            //var content = JsonConvert.SerializeObject(request);
+            //string url = BaseUrl + "/cards/"+cardId+"/attachments?key=" + AppKey + "&token=" + Token;
+            //NEED TO FIX IT
+            //var multipartContent = new MultipartFormDataContent();
+            //var fileContent = new ByteArrayContent(Convert.ToBase64String(request.file));
+            //multipartContent.Add(fileContent, request.name, "upload.jpg");
+            //var httpResponse = await _client.PostAsync(url, multipartContent);
+            //if (!httpResponse.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Can not add card " + httpResponse.StatusCode);
+            //}
+            //var createdTask = JsonConvert.DeserializeObject<Attachment>(await httpResponse.Content.ReadAsStringAsync());
+            //return createdTask;
         }
 
         public async Task DeleteAttachment(string cardId, string attachmentId)
