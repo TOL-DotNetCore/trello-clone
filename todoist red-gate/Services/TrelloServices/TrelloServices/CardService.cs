@@ -22,8 +22,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             _client = client;
             _config = config;
             AppKey = _config.GetValue<string>("Trello:ConsumerKey");
-            //Token = TrelloAuthorizationController.OAuthToken;
-            Token = "16a827c827226d35375b00936d65bea64d6c964f8e2e638f87fb9b27143eae7d";
+            Token = TrelloAuthorizationController.OAuthToken;
         }
         public async Task<Card> CreateCardAsync(Card task, string idList)
         {
