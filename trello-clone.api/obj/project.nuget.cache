@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "cExlNQbxSVgXLpJ6e5cEqel7slnSB3ti6wITcmVqOS01yftT8RERB/VV0cNef4O7UO06BHPvMFBNM0qeR6Yz4w==",
+  "success": true,
+  "projectFilePath": "E:\\.NET\\API\\trello-clone-solution\\trello-clone.api\\trello-clone.api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\harry\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.5\\swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.5\\swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.5\\swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.5\\swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}
