@@ -25,8 +25,8 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             _config = config;
             var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
             AppKey = ConsumerKey;
-            //Token = TrelloAuthorizationController.OAuthToken;
-            Token = "579c852cc1c1361ddca9544f8ade2c755bc9aba21bcbdcea7126d30caf274356";
+            Token = TrelloAuthorizationController.OAuthToken;
+            //Token = "579c852cc1c1361ddca9544f8ade2c755bc9aba21bcbdcea7126d30caf274356";
         }
 
         public async Task<Models.Board> Create(string nameBoard)
