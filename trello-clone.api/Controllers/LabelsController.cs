@@ -18,28 +18,28 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Models.Label> Get(string id)
+        public async Task<Models.Label> Get(string id, string Token)
         {
-            var tasks = await _labelService.Get(id);
+            var tasks = await _labelService.Get(id, Token);
             return tasks;
         }
 
         [HttpPut("{id}")]
-        public async Task<Models.Label> Update([FromBody] Models.Label labelToUpdate, string id)
+        public async Task<Models.Label> Update([FromBody] Models.Label labelToUpdate, string id, string Token)
         {
-            return await _labelService.Update(id, labelToUpdate);
+            return await _labelService.Update(id, labelToUpdate, Token);
         }
 
         [HttpDelete("{id}")]
-        public async Task Delete(string id)
+        public async Task Delete(string id, string Token)
         {
-            await _labelService.Delete(id);
+            await _labelService.Delete(id, Token);
         }
 
         [HttpPost("idBoard={idBoard}&name={name}&color={color}")]
-        public async Task<Models.Label> Create(string idBoard, string name, string color)
+        public async Task<Models.Label> Create(string idBoard, string name, string color, string Token)
         {
-            return await _labelService.Create(idBoard, name, color);
+            return await _labelService.Create(idBoard, name, color, Token);
         }
     }
 }

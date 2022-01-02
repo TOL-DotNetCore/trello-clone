@@ -17,19 +17,16 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
 
         public ChecklistService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:CónumerKey");
         }
 
-        public async Task Delete(string id)
+        public async Task Delete(string id, string Token)
         {
             string url = BaseUrl + "/checklists/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -39,7 +36,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Checklist> Get(string id)
+        public async Task<Checklist> Get(string id, string Token)
         {
             string url = BaseUrl + "/checklists/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -52,7 +49,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return task;
         }
 
-        public async Task<List<CheckItem>> GetCheckItemOn(string id)
+        public async Task<List<CheckItem>> GetCheckItemOn(string id, string Token)
         {
             var url = BaseUrl + "/checklists/" + id + "/checkItems?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -65,7 +62,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
-        public async Task<Checklist> Update(string id, Checklist task)
+        public async Task<Checklist> Update(string id, Checklist task, string Token)
         {
             var url = BaseUrl + "/checklists/" + id + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);

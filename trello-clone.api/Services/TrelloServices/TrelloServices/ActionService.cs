@@ -16,18 +16,15 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
 
         public ActionService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
-        public async Task Delete(string actionId)
+        public async Task Delete(string actionId, string Token)
         {
             string url = BaseUrl + "/actions/" + actionId + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -37,7 +34,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Models.Action> Get(string actionId)
+        public async Task<Models.Action> Get(string actionId, string Token)
         {
             string url = BaseUrl + "/actions/" + actionId + "?key=" + AppKey + "&token=" + Token;
             var httpresponse = await _client.GetAsync(url);
@@ -50,7 +47,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return task;
         }
 
-        public async Task<Board> GetTheBoardForAnAction(string actionId)
+        public async Task<Board> GetTheBoardForAnAction(string actionId, string Token)
         {
             string url = BaseUrl + "/actions/" + actionId + "/board" + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -63,7 +60,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Board>(content);
         }
 
-        public async Task<Models.Action> Update(string actionId, string text)
+        public async Task<Models.Action> Update(string actionId, string text, string Token)
         {
             string url = BaseUrl + "/actions/" + actionId + "?text=" + text + "&key=" + AppKey + "&token=" + Token;
             var httpresponse = await _client.PutAsync(url, null);

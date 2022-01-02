@@ -69,6 +69,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "OAuth.DotNetCore": {
+              "target": "Package",
+              "version": "[3.0.1, )"
             }
           },
           "imports": [

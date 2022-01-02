@@ -18,19 +18,16 @@ namespace todoist_red_gate.Services
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
         public ListService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
 
 
-        public async Task<List> CreateListAsync(string listName, string idBoard)
+        public async Task<List> CreateListAsync(string listName, string idBoard, string Token)
         {
             string url = BaseUrl + "/lists?key=" + AppKey + "&token=" + Token + "&name=" + listName + "&idBoard=" + idBoard;
             var httlResponse = await _client.PostAsync(url, null);
@@ -42,7 +39,7 @@ namespace todoist_red_gate.Services
             return createdTask;
         }
 
-        public async Task ArchiveAsync(string id)
+        public async Task ArchiveAsync(string id, string Token)
         {
             string url = BaseUrl + "/lists/" + id+"/closed?key=" + AppKey + "&token=" + Token + "&value=true";
             var httpResponse = await _client.PutAsync(url, null);
@@ -52,7 +49,7 @@ namespace todoist_red_gate.Services
             }
         }
 
-        public async Task<List<Card>> GetCardsInAList(string idList)
+        public async Task<List<Card>> GetCardsInAList(string idList, string Token)
         {
             string url = BaseUrl + "/lists/" + idList + "/cards?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -65,7 +62,7 @@ namespace todoist_red_gate.Services
             return res;
         }
 
-        public async Task<List> GetListAsync(string idList)
+        public async Task<List> GetListAsync(string idList, string Token)
         {
             string url = BaseUrl + "/lists/" + idList + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -81,7 +78,7 @@ namespace todoist_red_gate.Services
         }
 
 
-        public async Task<List> UpdateListAsync(List task, string idList)
+        public async Task<List> UpdateListAsync(List task, string idList, string Token)
         {
             var url = BaseUrl + "/lists/" + idList + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
@@ -98,7 +95,7 @@ namespace todoist_red_gate.Services
             return updatedTask;
         }
 
-        public async Task<Board> GetBoardAListIsOn(string listId)
+        public async Task<Board> GetBoardAListIsOn(string listId, string Token)
         {
             string url = BaseUrl + "/lists/" + listId + "/board?key=" + AppKey + "&token=" + Token;
             var httpRespone = await _client.GetAsync(url);

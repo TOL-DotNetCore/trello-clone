@@ -15,7 +15,6 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
 
         public CardService(HttpClient client, IConfiguration config)
@@ -23,9 +22,8 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             _client = client;
             _config = config;
             AppKey = _config.GetValue<string>("Trello:ConsumerKey");
-            Token = TrelloAuthorizationController.OAuthToken;
         }
-        public async Task<Card> CreateCardAsync(Card task, string idList)
+        public async Task<Card> CreateCardAsync(Card task, string idList, string Token)
         {
 
             var content = JsonConvert.SerializeObject(task);
@@ -38,7 +36,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             var createdTask = JsonConvert.DeserializeObject<Card>(await httpResponse.Content.ReadAsStringAsync());
             return createdTask;
         }
-        public async Task DeleteCardAsync(string id)
+        public async Task DeleteCardAsync(string id, string Token)
         {
             string url = BaseUrl + "/cards/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -48,7 +46,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Models.Card> GetCardAsync(string id)
+        public async Task<Models.Card> GetCardAsync(string id, string Token)
         {
             string url = BaseUrl + "/cards/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -63,7 +61,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
             return cardItem;
         }
-        public async Task<Card> UpdateCardAsync(Card task, string idCard)
+        public async Task<Card> UpdateCardAsync(Card task, string idCard, string Token)
         {
             var url = BaseUrl + "/cards/" + idCard + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
@@ -80,7 +78,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
 
         //NEED TO FIX
-        public async Task<Models.Action> GetActionOnCard(string cardId)
+        public async Task<Models.Action> GetActionOnCard(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/actions?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -92,7 +90,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Models.Action>(content);
         }
 
-        public async Task<Board> GetBoardCardIsOn(string cardId)
+        public async Task<Board> GetBoardCardIsOn(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/board?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -104,7 +102,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Models.Board>(content);
         }
 
-        public async Task<List<CheckItem>> GetCheckItemsOnTheCard(string cardId)
+        public async Task<List<CheckItem>> GetCheckItemsOnTheCard(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/checkItemStates?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -116,7 +114,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<List<Models.CheckItem>>(content);
         }
 
-        public async Task<List<Checklist>> GetCheckListsOnTheCard(string cardId)
+        public async Task<List<Checklist>> GetCheckListsOnTheCard(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/checkLists?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -128,7 +126,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<List<Models.Checklist>>(content);
         }
 
-        public async Task<List<Member>> GetMembersOfCards(string cardId)
+        public async Task<List<Member>> GetMembersOfCards(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/members?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -142,7 +140,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
 
         //Attachments
-        public async Task<List<Attachment>> GetAttachmentsOnACard(string cardId)
+        public async Task<List<Attachment>> GetAttachmentsOnACard(string cardId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/attachments?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -154,7 +152,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<List<Attachment>>(content);
         }
 
-        public async Task<Attachment> GetAnAttachment(string cardId, string attachmentId)
+        public async Task<Attachment> GetAnAttachment(string cardId, string attachmentId, string Token)
         {
             string url = BaseUrl + "/cards/" + cardId + "/attachments/"+attachmentId+"?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -166,9 +164,18 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Attachment>(content);
         }
 
-        public async Task<Attachment> CreateAttachment(string cardId, AttachmentCreateRequest request)
+        public async Task DeleteAttachment(string cardId, string attachmentId, string Token)
         {
-            return new Attachment();
+            string url = BaseUrl + "/cards/" + cardId + "/attachments/" + attachmentId + "?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.DeleteAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot delete the card item");
+            }
+        }
+
+        public Task<Attachment> CreateAttachment(string cardId, AttachmentCreateRequest request, string Token)
+        {
             //var content = JsonConvert.SerializeObject(request);
             //string url = BaseUrl + "/cards/"+cardId+"/attachments?key=" + AppKey + "&token=" + Token;
             //NEED TO FIX IT
@@ -182,16 +189,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             //}
             //var createdTask = JsonConvert.DeserializeObject<Attachment>(await httpResponse.Content.ReadAsStringAsync());
             //return createdTask;
-        }
-
-        public async Task DeleteAttachment(string cardId, string attachmentId)
-        {
-            string url = BaseUrl + "/cards/" + cardId + "/attachments/" + attachmentId + "?key=" + AppKey + "&token=" + Token;
-            var httpResponse = await _client.DeleteAsync(url);
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                throw new Exception("Cannot delete the card item");
-            }
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,9 +19,9 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet()]
-        public async Task<Models.Emoji> GetAll()
+        public async Task<Models.Emoji> GetAll(string Token)
         {
-            return await _emojiService.GetAll();
+            return await _emojiService.GetAll(Token);
         }
     }
 }

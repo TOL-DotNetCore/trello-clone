@@ -21,16 +21,16 @@ namespace todoist_red_gate.Controllers
 
         // NEED TO FIX IT
         [HttpGet("query={query}")]
-        public async Task<Object> SearchTrelo(string query)
+        public async Task<Object> SearchTrelo(string query, string Token)
         {
-            var task = await _searchService.SearchTrello(query);
+            var task = await _searchService.SearchTrello(query, Token);
             return task;
         }
 
         [HttpGet("members/query={query}")]
-        public async Task<List<Models.Member>> SearchMember(string query)
+        public async Task<List<Models.Member>> SearchMember(string query, string Token)
         {
-            var tasks = await _searchService.SearchMember(query);
+            var tasks = await _searchService.SearchMember(query, Token);
             return tasks;
         }
     }

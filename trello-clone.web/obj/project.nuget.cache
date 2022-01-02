@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zlUD5NxnNvOye0DwrKofVvi+XIM4cnsvFkc+C7PAyIlc1e6VDP6YU+sq30Oat4HWvUj97js437y2RAjNTOcROQ==",
+  "dgSpecHash": "KR9qbR2MtF5z6AHEzVeQbM0/VNRgY6APdLug+Du5KYykEl51JRnmjVcvLusNFBmE/rmgav76VgDVjMBMgc31Tg==",
   "success": true,
   "projectFilePath": "E:\\.NET\\API\\trello-clone-solution\\trello-clone.web\\trello-clone.web.csproj",
   "expectedPackageFiles": [
@@ -64,6 +64,7 @@
     "C:\\Users\\harry\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\harry\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\harry\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\harry\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512",
     "C:\\Users\\harry\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\harry\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\harry\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",

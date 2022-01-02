@@ -19,23 +19,23 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{memberId}")]
-        public async Task<Models.Member> Get(string memberId)
+        public async Task<Models.Member> Get(string memberId, string Token)
         {
-            var task = await _memberService.Get(memberId);
+            var task = await _memberService.Get(memberId, Token);
             return task;
         }
 
         [HttpGet("{memberId}/actions")]
-        public async Task<List<Models.Action>> GetActionsOfMember(string memberId)
+        public async Task<List<Models.Action>> GetActionsOfMember(string memberId, string Token)
         {
-            var tasks = await _memberService.GetActionsOfMember(memberId);
+            var tasks = await _memberService.GetActionsOfMember(memberId, Token);
             return tasks;
         }
 
         [HttpPut("{memberId}")]
-        public async Task<Models.Member> Update(string memberId, [FromBody] Models.Member memberToUpdate)
+        public async Task<Models.Member> Update(string memberId, [FromBody] Models.Member memberToUpdate, string Token)
         {
-            var task = await _memberService.Update(memberId, memberToUpdate);
+            var task = await _memberService.Update(memberId, memberToUpdate, Token);
             return task;
         }
     }

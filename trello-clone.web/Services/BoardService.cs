@@ -16,10 +16,10 @@ namespace trello_clone.web.Services
         {
             _clientFactory = clientFactory;
         }
-        public async Task<Board> GetBoard(string boardId)
+        public async Task<Board> GetBoard(string boardId, string Token)
         {
             var client = _clientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/boards/" + boardId);
+            HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/boards/" + boardId + "?Token=" + Token);
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
@@ -29,10 +29,10 @@ namespace trello_clone.web.Services
         }
 
 
-        public async Task<List<List>> GetListsOfBoard(string boardId)
+        public async Task<List<List>> GetListsOfBoard(string boardId, string Token)
         {
             var client = _clientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/boards/" + boardId + "/lists");
+            HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/boards/" + boardId + "/lists?Token=" + Token);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

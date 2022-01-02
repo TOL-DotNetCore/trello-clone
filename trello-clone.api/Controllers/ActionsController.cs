@@ -21,29 +21,29 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{actionId}")]
-        public async Task<Models.Action> Get(string actionId)
+        public async Task<Models.Action> Get(string actionId, string Token)
         {
-            var task = await _actionService.Get(actionId);
+            var task = await _actionService.Get(actionId, Token);
             return task;
         }
         [HttpPut("{actionId}/text={text}")]
-        public async Task<Models.Action> Update(string actionId, string text)
+        public async Task<Models.Action> Update(string actionId, string text, string Token)
         {
-            var task = await _actionService.Update(actionId, text);
+            var task = await _actionService.Update(actionId, text, Token);
             return task;
         }
 
         [HttpGet("{actionId}/board")]
-        public async Task<Models.Board> GetTheBoardForAnAction(string actionId)
+        public async Task<Models.Board> GetTheBoardForAnAction(string actionId, string Token)
         {
-            var task = await _actionService.GetTheBoardForAnAction(actionId);
+            var task = await _actionService.GetTheBoardForAnAction(actionId, Token);
             return task;
         }
 
         [HttpDelete("{actionId}")]
-        public async Task Delete(string actionId)
+        public async Task Delete(string actionId, string Token)
         {
-            await _actionService.Delete(actionId);
+            await _actionService.Delete(actionId, Token);
         }
 
     }

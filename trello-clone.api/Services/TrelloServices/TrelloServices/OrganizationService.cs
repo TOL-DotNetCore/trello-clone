@@ -23,11 +23,9 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         {
             _config = config;
             _client = client;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
-        public async Task<Organization> Create(string displayName)
+        public async Task<Organization> Create(string displayName, string Token)
         {
             string url = BaseUrl + "/organizations?key=" + AppKey + "&token=" + Token + "&displayName=" + displayName;
             var httpResponse = await _client.PostAsync(url, null);
@@ -39,7 +37,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Models.Organization>(content);
         }
 
-        public async Task Delete(string organizationId)
+        public async Task Delete(string organizationId, string Token)
         {
             string url = BaseUrl + "/organizations/" + organizationId + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -49,7 +47,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Organization> Get(string organizationId)
+        public async Task<Organization> Get(string organizationId, string Token)
         {
             string url = BaseUrl + "/organizations/" +organizationId+ "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -61,7 +59,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Models.Organization>(content);
         }
 
-        public async Task<Organization> Update(string organizationId, Organization orgToUpdate)
+        public async Task<Organization> Update(string organizationId, Organization orgToUpdate, string Token)
         {
             string url = BaseUrl + "/organizations/" + organizationId + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(orgToUpdate);

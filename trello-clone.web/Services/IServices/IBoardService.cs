@@ -8,7 +8,7 @@ namespace trello_clone.web.Services.IServices
 {
     public interface IBoardService
     {
-        public Task<Board> GetBoard(string boardId);
-        public Task<List<List>> GetListsOfBoard(string boardId);
+        public Task<Board> GetBoard(string boardId, string Token);
+        public Task<List<List>> GetListsOfBoard(string boardId, string Token);
     }
 }

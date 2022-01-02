@@ -7,7 +7,7 @@ namespace todoist_red_gate.Services.TrelloServices
 {
     public interface IsearchService
     {
-        Task<List<object>> SearchTrello(string query);
-        Task<List<Models.Member>> SearchMember(string query);
+        Task<List<object>> SearchTrello(string query, string Token);
+        Task<List<Models.Member>> SearchMember(string query, string Token);
     }
 }

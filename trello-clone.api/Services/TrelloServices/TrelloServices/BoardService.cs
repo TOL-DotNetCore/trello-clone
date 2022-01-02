@@ -17,19 +17,15 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
         public BoardService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
-            //Token = "579c852cc1c1361ddca9544f8ade2c755bc9aba21bcbdcea7126d30caf274356";
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
 
-        public async Task<Models.Board> Create(string nameBoard)
+        public async Task<Models.Board> Create(string nameBoard, string Token)
         {
             string url = BaseUrl + "/boards/?key=" + AppKey + "&token=" + Token + "&name=" + nameBoard;
             var httpResponse = await _client.PostAsync(url, null);
@@ -42,7 +38,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return task;
         }
 
-        public async Task Delete(string id)
+        public async Task Delete(string id, string Token)
         {
             string url = BaseUrl + "/boards/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -52,7 +48,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Models.Board> Get(string id)
+        public async Task<Models.Board> Get(string id, string Token)
         {
             string url = BaseUrl + "/boards/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -65,7 +61,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return board;
         }
 
-        public async Task<List<Models.Membership>> GetMemberships(string idBoard)
+        public async Task<List<Models.Membership>> GetMemberships(string idBoard, string Token)
         {
             string url = BaseUrl + "/boards/" + idBoard + "/memberships?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -78,7 +74,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
-        public async Task<Models.Board> Update(string id, Models.Board task)
+        public async Task<Models.Board> Update(string id, Models.Board task, string Token)
         {
             var url = BaseUrl + "/boards/" + id + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);
@@ -98,7 +94,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
 
         // Custom API
-        public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId)
+        public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId, string Token)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
@@ -122,7 +118,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return allCard;
         }
 
-        public async Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end)
+        public async Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end, string Token)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
@@ -148,7 +144,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         }
 
         // Week sumary, get list cards had complete, get list cards un finished
-        public async Task<Models.WeekSumary> GetSumaryOfWeek(string boardId)
+        public async Task<Models.WeekSumary> GetSumaryOfWeek(string boardId, string Token)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
@@ -185,7 +181,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
 
         // Get all cards unfinished of the board
 
-        public async Task<List<Card>> GetCardsUnfinished(string boardId)
+        public async Task<List<Card>> GetCardsUnfinished(string boardId, string Token)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
@@ -214,7 +210,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         }
 
         // Get all cards unfinished of the board from start date to end date
-        public async Task<List<Card>> GetCardsUnfinished(string boardId, DateTime start, DateTime end)
+        public async Task<List<Card>> GetCardsUnfinished(string boardId, DateTime start, DateTime end, string Token)
         {
             string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var allListHttpResponse = await _client.GetAsync(urlGetAllList);
@@ -241,7 +237,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return allCard;
         }
 
-        public async Task<List<List>> GetListsOnBoard(string boardId)
+        public async Task<List<List>> GetListsOnBoard(string boardId, string Token)
         {
             string url = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);

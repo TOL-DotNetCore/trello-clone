@@ -19,29 +19,29 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Models.Checklist> Get(string id)
+        public async Task<Models.Checklist> Get(string id, string Token)
         {
-            var task = await _checklistService.Get(id);
+            var task = await _checklistService.Get(id, Token);
             return task;
         }
 
         [HttpGet("{checkListId}/checkitems")]
-        public async Task<List<Models.CheckItem>> GetCheckitemOn(string checkListId)
+        public async Task<List<Models.CheckItem>> GetCheckitemOn(string checkListId, string Token)
         {
-            var tasks = await _checklistService.GetCheckItemOn(checkListId);
+            var tasks = await _checklistService.GetCheckItemOn(checkListId, Token);
             return tasks;
         }
 
         [HttpPut("{id}")]
-        public async Task<Models.Checklist> Update([FromBody] Models.Checklist checklistToUpdate, string id)
+        public async Task<Models.Checklist> Update([FromBody] Models.Checklist checklistToUpdate, string id, string Token)
         {
-            return await _checklistService.Update(id, checklistToUpdate);
+            return await _checklistService.Update(id, checklistToUpdate, Token);
         }
 
         [HttpDelete("{id}")]
-        public async Task Delete(string id)
+        public async Task Delete(string id, string Token)
         {
-            await _checklistService.Delete(id);
+            await _checklistService.Delete(id, Token);
         }
     }
 }
