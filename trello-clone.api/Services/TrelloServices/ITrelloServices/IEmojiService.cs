@@ -7,6 +7,6 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
 {
     public interface IEmojiService
     {
-        Task<Models.Emoji> GetAll();
+        Task<Models.Emoji> GetAll(string Token);
     }
 }

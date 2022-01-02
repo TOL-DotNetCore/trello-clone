@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using trello_clone.web.Data;
+using trello_clone.web.Entities;
 using trello_clone.web.Services;
 using trello_clone.web.Services.IServices;
 
@@ -28,32 +30,36 @@ namespace trello_clone.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IBoardService, BoardService>();
+            services.AddScoped<IBoardService, BoardService>();
+            services.AddScoped<ITrelloTokenService, TrelloTokenService>();
             services.AddHttpClient();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication()
-                .AddFacebook(Options =>
+                .AddFacebook(options =>
                 {
-                    Options.AppId = "1268755923629808";
-                    Options.AppSecret = "d734aab0ab2976c5c47b0f6d3fcd3d4a";
+                    options.AppId = Configuration.GetValue<string>("Facebook:AppId");
+                    options.AppSecret = Configuration.GetValue<string>("Facebook:AppSecret");
+
                 }
                 )
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "928345614975-j8d3qkvjmua4k4ah0ri1tc0knq0g05i4.apps.googleusercontent.com";
-                    options.ClientSecret = "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";
+                    options.ClientId = Configuration.GetValue<string>("Google:ClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("Google:ClientSecret");
                 });
 
-            
-        }
+            services.AddMvc();
+            services.AddHttpContextAccessor();
 
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

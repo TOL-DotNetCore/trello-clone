@@ -9,25 +9,31 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using trello_clone.web.Data;
+using trello_clone.web.Services.IServices;
 
-namespace todoist_red_gate.Controllers
+namespace trello_clone.web.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class TrelloAuthorizationController : ControllerBase
     {
         private const string RequestUrl = "https://trello.com/1/OAuthGetRequestToken";
         private const string RequestAccessTokenUrl = "https://trello.com/1/OAuthGetAccessToken";
         private readonly IConfiguration _config;
+        private readonly ITrelloTokenService _tlTokenService;
 
         private readonly string ConsumerKey;
         private readonly string ConsumerSecret;
 
-        public TrelloAuthorizationController(IConfiguration config)
+        private readonly ApplicationDbContext _context;
+        public TrelloAuthorizationController(IConfiguration config, ApplicationDbContext context, ITrelloTokenService tlTokenService)
         {
+            _context = context;
             _config = config;
             ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
             ConsumerSecret = _config.GetValue<string>("Trello:ConsumerSecret");
+            _tlTokenService = tlTokenService;
         }
 
         private static string TokenSecret { get; set; }
@@ -43,7 +49,7 @@ namespace todoist_red_gate.Controllers
                 ConsumerKey = ConsumerKey,
                 ConsumerSecret = ConsumerSecret,
                 RequestUrl = RequestUrl,
-                CallbackUrl = "https://localhost:44395/api/trelloauthorization/callback"
+                CallbackUrl = "https://localhost:44330/trelloauthorization/callback"
             };
 
             var url = client.RequestUrl + "?" + client.GetAuthorizationQuery();
@@ -61,8 +67,6 @@ namespace todoist_red_gate.Controllers
             return Redirect("https://trello.com/1/OAuthAuthorizeToken?oauth_token=" + OauthToken);
         }
 
-        public static string OAuthToken { get; set; }
-        public static string OAuthTokenSecret { get; set; }
         [HttpGet]
         public IActionResult Callback()
         {
@@ -93,11 +97,15 @@ namespace todoist_red_gate.Controllers
             var reader = new StreamReader(dataStream);
             var responseFromServer = reader.ReadToEnd();
 
+            string OAuthToken;
+            string OAuthTokenSecret;
             // Parse and save access token and secret
             OAuthToken = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token");
             OAuthTokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
 
-            return Ok(new {key = ConsumerKey, token = OAuthToken});
+            // Save Token to application user
+            _tlTokenService.SaveToken(OAuthToken);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

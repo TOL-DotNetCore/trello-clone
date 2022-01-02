@@ -16,19 +16,16 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
 
         public EmojiService(HttpClient client, IConfiguration config)
         {
             _config = config;
             _client = client;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
 
-        public async Task<Models.Emoji> GetAll()
+        public async Task<Models.Emoji> GetAll(string Token)
         {
             string url = BaseUrl + "/emoji?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);

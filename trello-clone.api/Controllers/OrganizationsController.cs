@@ -19,23 +19,23 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{organizationId}")]
-        public async Task<Models.Organization> Get(string organizationId)
+        public async Task<Models.Organization> Get(string organizationId, string Token)
         {
-            var task = await _organizationService.Get(organizationId);
+            var task = await _organizationService.Get(organizationId, Token);
             return task;
         }
 
         [HttpPut("{organizationId}")]
-        public async Task<Models.Organization> Update(string organizationId, Models.Organization orgToUpdate)
+        public async Task<Models.Organization> Update(string organizationId, Models.Organization orgToUpdate, string Token)
         {
-            var task = await _organizationService.Update(organizationId, orgToUpdate);
+            var task = await _organizationService.Update(organizationId, orgToUpdate, Token);
             return task;
         }
 
         [HttpDelete("{organizationId}")]
-        public async Task Delete(string organizationId)
+        public async Task Delete(string organizationId, string Token)
         {
-            await _organizationService.Delete(organizationId);
+            await _organizationService.Delete(organizationId, Token);
         }
     }
 }
