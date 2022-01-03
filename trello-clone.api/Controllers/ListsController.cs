@@ -32,7 +32,7 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{listId}/cards")]
-        public async Task<List<Models.Card>> GetCards(string listId, string Token)
+        public async Task<List<Models.Card>> GetCards(string listId="5d7a5dfdba15a47397b982c9", string Token="38d8a9fd92b16d19eace2b414dca84cc86a98f1b4d47e8d06ed86a81eb3edfe0")
         {
             var tasks = await _listService.GetCardsInAList(listId, Token);
             return tasks;

@@ -10,7 +10,10 @@
         font-family: "Open Sans";
     }
 
-
+    .container {
+        margin: 0;
+        padding: 0;
+    }
 
     button {
         outline: none;
@@ -28,15 +31,17 @@
 
 
     #root {
-        margin: 1em;
+        margin: 10px;
         /*border: 1px solid grey;*/
         /*display: flex;*/
-        min-width: 1200px;
+        @* min-width: 1200px; *@
+        width: 3000px;
     }
 
 
     .todoList {
         /*border: 1px solid red;*/
+        width: 300px;
         border-radius: 4px;
         min-height: 100px;
         background: rgb(235, 235, 235);
@@ -165,20 +170,39 @@
 @* @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    }
 
-<h1>Name Board: @ViewBag.BoardInfo.name</h1>
-@foreach (var item in ViewBag.ListsOfBoard)
-{
+    <h1>Name Board: @ViewBag.BoardInfo.name</h1>
+    @foreach (var item in ViewBag.ListsOfBoard)
+    {
     @item.name
     <br />
-} *@
+    } *@
 <div id="addTodoListDiv">
     <input id="addTodoListInput" class="comment">
     <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
+
 </div>
 
-<div id="root"></div>
+<div id="root">
+    @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
+    {
+        <div class="todoList">
+            <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
+            id="to-do-list-button">Add</button>
+            <div>
+                @foreach (var card in @ViewBag.LstCards[i])
+                {
+                    <div class="card">
+                        <p>@card.name</p><button>X</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+
+</div>
 
 <script>
     let root = document.getElementById("root");
@@ -453,5 +477,6 @@
     });
 
 
-
+    @*
+        let todoList1 = new todoList(root); *@
 </script>

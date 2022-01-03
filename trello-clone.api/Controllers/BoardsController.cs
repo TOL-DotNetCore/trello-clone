@@ -33,7 +33,7 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Models.Board> Get(string id = "5d6e2a55d1759a59f7dc902d", string Token="")
+        public async Task<Models.Board> Get(string id = "5d6e2a55d1759a59f7dc902d", string Token="38d8a9fd92b16d19eace2b414dca84cc86a98f1b4d47e8d06ed86a81eb3edfe0")
         {
             var tasks = await _boardService.Get(id, Token);
             return tasks;

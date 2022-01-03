@@ -8,6 +8,6 @@ namespace trello_clone.web.Services.IServices
 {
     public interface IListService
     {
-        public List<Card> GetCardsOfList(string listId);
+        public Task<List<Card>> GetCardsOfList(string listId, string Token);
     }
 }

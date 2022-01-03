@@ -31,6 +31,7 @@ namespace trello_clone.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IBoardService, BoardService>();
+            services.AddScoped<IListService, ListService>();
             services.AddScoped<ITrelloTokenService, TrelloTokenService>();
             services.AddHttpClient();
 
