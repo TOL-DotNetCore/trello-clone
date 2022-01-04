@@ -96,26 +96,27 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         // Custom API
         public async Task<List<Models.Card>> GetAllCurentDateCardOfBoard(string boardId, string Token)
         {
-            string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
-            var allListHttpResponse = await _client.GetAsync(urlGetAllList);
-            if(!allListHttpResponse.IsSuccessStatusCode)
-            {
-                throw new Exception("Cannot get lists");
-            }
-            var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
-            var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
+            //string urlGetAllList = BaseUrl + "/boards/" + boardId + "/lists?key=" + AppKey + "&token=" + Token;
+            //var allListHttpResponse = await _client.GetAsync(urlGetAllList);
+            //if(!allListHttpResponse.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Cannot get lists");
+            //}
+            //var allListContent = await allListHttpResponse.Content.ReadAsStringAsync();
+            //var listList = JsonConvert.DeserializeObject<List<Models.List>>(allListContent);
 
-            List<Models.Card> allCard = new List<Models.Card>();
-            foreach (var list in listList)
-            {
-                string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
-                var allCardHttpResponse = await _client.GetAsync(urlGetCard);
-                var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
-                var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent)
-                    .Where(x=>x.due != null).Where(x=>DateTime.Compare((DateTime)(x.due), DateTime.Now.Date) == 0);
-                allCard.AddRange(listCard);
-            }
-            return allCard;
+            //List<Models.Card> allCard = new List<Models.Card>();
+            //foreach (var list in listList)
+            //{
+            //    string urlGetCard = BaseUrl + "/lists/" + list.id + "/cards?key=" + AppKey + "&token=" + Token;
+            //    var allCardHttpResponse = await _client.GetAsync(urlGetCard);
+            //    var allCardContent = await allCardHttpResponse.Content.ReadAsStringAsync();
+            //    var listCard = JsonConvert.DeserializeObject<List<Models.Card>>(allCardContent)
+            //        .Where(x=>x.due != null).Where(x=>DateTime.Compare((DateTime)(x.due), DateTime.Now.Date) == 0);
+            //    allCard.AddRange(listCard);
+            //}
+            //return allCard;
+            return null;
         }
 
         public async Task<List<Models.Card>> GetAllCardBetween(string boardId, DateTime start, DateTime end, string Token)

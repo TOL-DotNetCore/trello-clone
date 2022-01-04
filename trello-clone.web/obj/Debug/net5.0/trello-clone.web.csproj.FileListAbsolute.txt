@@ -355,3 +355,4 @@ E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\ref\trello-clone.web.dll
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone.web.pdb
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone.web.genruntimeconfig.cache
+E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\Razor\Views\Boards\Index.cshtml.g.cs

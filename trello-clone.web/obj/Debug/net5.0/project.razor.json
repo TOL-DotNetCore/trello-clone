@@ -15634,6 +15634,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\.NET\\API\\trello-clone-solution\\trello-clone.web\\Views\\Boards\\Index.cshtml",
+      "TargetPath": "Views\\Boards\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\.NET\\API\\trello-clone-solution\\trello-clone.web\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
       "FileKind": "mvc"
