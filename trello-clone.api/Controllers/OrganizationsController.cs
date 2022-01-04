@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 
 namespace todoist_red_gate.Controllers
@@ -36,6 +37,13 @@ namespace todoist_red_gate.Controllers
         public async Task Delete(string organizationId, string Token)
         {
             await _organizationService.Delete(organizationId, Token);
+        }
+
+        [HttpGet("{organizationId}/boards")]
+        public async Task<List<Board>> GetBoards(string organizationId, string Token)
+        {
+            var res = await _organizationService.GetBoardsInOrganization(organizationId, Token);
+            return res;
         }
     }
 }

@@ -16,9 +16,15 @@ namespace trello_clone.web.Controllers
     {
         private readonly IBoardService _boardService;
         private readonly IListService _listService;
+        private readonly IMemberService _memberService;
+        private readonly IOrganizationService _orgService;
         private readonly ITrelloTokenService _trelloTokenService;
-        public BoardsController(IBoardService boardService, IListService listService, ITrelloTokenService trelloTokenService)
+        public BoardsController(IBoardService boardService, IListService listService,
+            IOrganizationService orgService,
+            IMemberService memberService, ITrelloTokenService trelloTokenService)
         {
+            _orgService = orgService;
+            _memberService = memberService;
             _trelloTokenService = trelloTokenService;
             _boardService = boardService;
             _listService = listService;
@@ -42,5 +48,25 @@ namespace trello_clone.web.Controllers
             
             return View();
         }
+
+        [Authorize]
+        [HttpGet()]
+        public async Task<IActionResult> Index() {
+            var trelloToken = _trelloTokenService.GetToken();
+            var me = await _memberService.GetCurrentInfo(trelloToken);
+
+
+            var allOrg = await _memberService.GetOrganizationsOfMember(me.id, trelloToken);
+            ViewBag.Organizations = allOrg;
+
+            var allBoards = new List<List<Board>>();
+            foreach(var org in allOrg)
+            {
+                var allBoardsOfOrg = await _orgService.GetBoardsOfOrg(org.id, trelloToken);
+                allBoards.Add(allBoardsOfOrg);
+            }
+            ViewBag.AllBoards = allBoards;
+            return View();
+        } 
     }
 }

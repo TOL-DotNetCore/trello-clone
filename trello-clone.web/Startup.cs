@@ -32,7 +32,11 @@ namespace trello_clone.web
         {
             services.AddScoped<IBoardService, BoardService>();
             services.AddScoped<IListService, ListService>();
+            services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
             services.AddScoped<ITrelloTokenService, TrelloTokenService>();
+
+
             services.AddHttpClient();
 
             services.AddDbContext<ApplicationDbContext>(options =>

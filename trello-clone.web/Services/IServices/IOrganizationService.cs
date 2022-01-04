@@ -6,9 +6,8 @@ using trello_clone.web.Models;
 
 namespace trello_clone.web.Services.IServices
 {
-    public interface IBoardService
+    public interface IOrganizationService
     {
-        Task<Board> GetBoard(string boardId, string Token);
-        Task<List<List>> GetListsOfBoard(string boardId, string Token);
+        Task<List<Board>> GetBoardsOfOrg(string orgId, string Token);
     }
 }

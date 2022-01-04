@@ -59,7 +59,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
             var content = await httpResponse.Content.ReadAsStringAsync();
             var tasks = JsonConvert.DeserializeObject<List<Models.CheckItem>>(content);
-            return tasks;
+            return tasks; 
         }
 
         public async Task<Checklist> Update(string id, Checklist task, string Token)

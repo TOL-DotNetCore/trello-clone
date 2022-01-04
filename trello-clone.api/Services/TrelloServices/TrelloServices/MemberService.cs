@@ -49,6 +49,32 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
+        public async Task<Member> GetCurrentInfo(string Token)
+        {
+            string url = BaseUrl + "/members/me?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var mem = JsonConvert.DeserializeObject<Member>(content);
+            return mem;
+        }
+
+        public async Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token)
+        {
+            string url = BaseUrl + "/members/" + memberId + "/organizations" + "?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var tasks = JsonConvert.DeserializeObject<List<Organization>>(content);
+            return tasks;
+        }
+
         public async Task<Member> Update(string memberId, Models.Member memberToUpdate, string Token)
         {
             string url = BaseUrl + "/members/" + memberId + "?key=" + AppKey + "&token=" + Token;

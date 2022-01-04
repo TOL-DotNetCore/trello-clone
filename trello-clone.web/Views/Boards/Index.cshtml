@@ -1,0 +1,39 @@
+﻿<style>
+  .board-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style-type: none;
+  }
+
+  .board-item {
+    margin: 0 2% 2% 0;
+    padding: 0;
+    transform: translate(0);
+    width: 23.5%;
+    height: 100px;
+    background-color: #9ff09f;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .org-boards {
+    background-color: rgb(43, 43, 83);
+  }
+</style>
+@for(int i=0; i < ViewBag.Organizations.Count; i++) {
+  <div class="org-boards">
+  <div class="boards">
+    <h3>@ViewBag.Organizations[i].displayName</h3>
+    <ul class="board-list">
+      @for(int j=0; j < @ViewBag.AllBoards[i].Count; j++) {
+        
+        <li class="board-item">
+          @{string nameBoard = ViewBag.AllBoards[i][j].name;}
+          @Html.ActionLink(nameBoard, "read", new { id =  @ViewBag.AllBoards[i][j].id})
+        </li>   
+      }
+    </ul>
+  </div>
+</div>
+}

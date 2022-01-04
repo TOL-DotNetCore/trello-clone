@@ -11,5 +11,6 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task<Models.Organization> Update(string organizationId, Models.Organization orgToUpdate, string Token);
         Task Delete(string organizationId, string Token);
         Task<Models.Organization> Create(string displayName, string Token);
+        Task<List<Models.Board>> GetBoardsInOrganization(string organizationId, string Token);
     }
 }
