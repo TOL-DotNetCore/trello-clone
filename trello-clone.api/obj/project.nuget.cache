@@ -1,17 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "cExlNQbxSVgXLpJ6e5cEqel7slnSB3ti6wITcmVqOS01yftT8RERB/VV0cNef4O7UO06BHPvMFBNM0qeR6Yz4w==",
+  "dgSpecHash": "9c9Q2nwSJEP5Wn+MlIQCT3UCkbpSowMIN5EbfrSLThHhtcoDfPXANf3EeU2iVxznXtdEKDEO6YIrD0ZgF1Y+SA==",
   "success": true,
-  "projectFilePath": "E:\\.NET\\API\\trello-clone-solution\\trello-clone.api\\trello-clone.api.csproj",
+  "projectFilePath": "D:\\Project\\Back-end\\trello-clone\\trello-clone.api\\trello-clone.api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\harry\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.5\\swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.5\\swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.5\\swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
-    "C:\\Users\\harry\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.5\\swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512"
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\oauth.dotnetcore\\3.0.1\\oauth.dotnetcore.3.0.1.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.5\\swashbuckle.aspnetcore.6.1.5.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.5\\swashbuckle.aspnetcore.swagger.6.1.5.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.5\\swashbuckle.aspnetcore.swaggergen.6.1.5.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.5\\swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\hongd\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
   ],
   "logs": []
 }
