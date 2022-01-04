@@ -52,7 +52,6 @@ namespace trello_clone.web
                 {
                     options.AppId = Configuration.GetValue<string>("Facebook:AppId");
                     options.AppSecret = Configuration.GetValue<string>("Facebook:AppSecret");
-
                 }
                 )
                 .AddGoogle(options =>

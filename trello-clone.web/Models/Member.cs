@@ -42,29 +42,33 @@ namespace trello_clone.web.Models
         public TotalPerMember totalPerMember { get; set; }
     }
 
+    public class BioData
+    {
+        public Emoji emoji { get; set; }
+    }
+
 
     public class Member
     {
         public string id { get; set; }
-        public string bio { get; set; }
-        public object bioData { get; set; }
-        public bool confirmed { get; set; }
-        public string memberType { get; set; }
-        public string username { get; set; }
         public string aaId { get; set; }
+        public bool isAaMastered { get; set; }
         public bool activityBlocked { get; set; }
-        public string avatarHash { get; set; }
-        public string avatarUrl { get; set; }
+        public object avatarHash { get; set; }
+        public object avatarUrl { get; set; }
+        public string bio { get; set; }
+        public BioData bioData { get; set; }
+        public bool confirmed { get; set; }
         public string fullName { get; set; }
-        public object idEnterprise { get; set; }
-        public List<object> idEnterprisesDeactivated { get; set; }
-        public object idMemberReferrer { get; set; }
+        public string idMemberReferrer { get; set; }
         public List<object> idPremOrgsAdmin { get; set; }
         public string initials { get; set; }
+        public string memberType { get; set; }
         public NonPublic nonPublic { get; set; }
         public bool nonPublicAvailable { get; set; }
         public List<object> products { get; set; }
         public string url { get; set; }
+        public string username { get; set; }
         public string status { get; set; }
         public object aaBlockSyncUntil { get; set; }
         public object aaEmail { get; set; }
@@ -72,12 +76,13 @@ namespace trello_clone.web.Models
         public string avatarSource { get; set; }
         public int credentialsRemovedCount { get; set; }
         public object domainClaimed { get; set; }
-        public string email { get; set; }
+        public object email { get; set; }
+        public object goldSunsetFreeTrialIdOrganization { get; set; }
         public string gravatarHash { get; set; }
         public List<string> idBoards { get; set; }
         public List<string> idOrganizations { get; set; }
         public List<object> idEnterprisesAdmin { get; set; }
-        public List<string> loginTypes { get; set; }
+        public object loginTypes { get; set; }
         public MarketingOptIn marketingOptIn { get; set; }
         public List<MessagesDismissed> messagesDismissed { get; set; }
         public List<string> oneTimeMessagesDismissed { get; set; }
@@ -85,8 +90,9 @@ namespace trello_clone.web.Models
         public List<object> trophies { get; set; }
         public object uploadedAvatarHash { get; set; }
         public object uploadedAvatarUrl { get; set; }
-        public List<object> premiumFeatures { get; set; }
-        public bool isAaMastered { get; set; }
+        public List<string> premiumFeatures { get; set; }
+        public object idEnterprise { get; set; }
+        public List<object> idEnterprisesDeactivated { get; set; }
         public string ixUpdate { get; set; }
         public Limits limits { get; set; }
     }

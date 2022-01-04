@@ -7547,11 +7547,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Back-end\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
+      "projectUniqueName": "D:\\Project\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
       "projectName": "trello-clone.web",
-      "projectPath": "D:\\Project\\Back-end\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
+      "projectPath": "D:\\Project\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
       "packagesPath": "C:\\Users\\hongd\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Back-end\\trello-clone\\trello-clone.web\\obj\\",
+      "outputPath": "D:\\Project\\trello-clone\\trello-clone.web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

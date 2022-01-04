@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jmL35/Kw+Tw8pnEYEmrNR2SIFTwaB38/PUKsvq4bYUh9Pc4FUqhwP7IFmAgiZlm76YTaX7gO+MYo3OnNu0Jeyg==",
+  "dgSpecHash": "VxzAyHw2zc+wFBHZV0yXOvUaXrGBEuH+VHuhPY7CO3Ok5xUcfAQ5kUrSxGKb+WB6F/58oHAmfCc1NjAqjw3SiA==",
   "success": true,
-  "projectFilePath": "D:\\Project\\Back-end\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
+  "projectFilePath": "D:\\Project\\trello-clone\\trello-clone.web\\trello-clone.web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hongd\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\hongd\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.0\\microsoft.aspnetcore.authentication.facebook.5.0.0.nupkg.sha512",
