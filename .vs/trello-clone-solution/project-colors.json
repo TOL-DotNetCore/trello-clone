@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "61871e39-3740-47dd-90b9-99c616550c54": {
+      "ProjectGuid": "61871e39-3740-47dd-90b9-99c616550c54",
+      "DisplayName": "trello-clone.web",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "0d516ce4-fc5b-4973-8e3b-28d3aed1a96a": {
+      "ProjectGuid": "0d516ce4-fc5b-4973-8e3b-28d3aed1a96a",
+      "DisplayName": "trello-clone",
+      "ColorIndex": 1
+    },
+    "5ddcc970-8d7f-4fe1-8477-7c15ab2d52f3": {
+      "ProjectGuid": "5ddcc970-8d7f-4fe1-8477-7c15ab2d52f3",
+      "DisplayName": "trello-clone.api",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
