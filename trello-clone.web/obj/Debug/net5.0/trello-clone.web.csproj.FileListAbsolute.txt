@@ -763,3 +763,4 @@ D:\Project\trello-clone\trello-clone.web\obj\Debug\net5.0\trello-clone.web.dll
 D:\Project\trello-clone\trello-clone.web\obj\Debug\net5.0\ref\trello-clone.web.dll
 D:\Project\trello-clone\trello-clone.web\obj\Debug\net5.0\trello-clone.web.pdb
 D:\Project\trello-clone\trello-clone.web\obj\Debug\net5.0\trello-clone.web.genruntimeconfig.cache
+E:\.NET\API\trello-clone-solution\trello-clone.web\bin\Debug\net5.0\libman.json
