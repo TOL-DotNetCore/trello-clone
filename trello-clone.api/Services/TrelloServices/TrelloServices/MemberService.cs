@@ -16,18 +16,15 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
-        private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
+        private readonly string AppKey;
         public MemberService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
-        public async Task<Member> Get(string memberId)
+        public async Task<Member> Get(string memberId, string Token)
         {
             string url = BaseUrl + "/members/" + memberId + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -39,7 +36,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return JsonConvert.DeserializeObject<Models.Member>(content);
         }
 
-        public async Task<List<Models.Action>> GetActionsOfMember(string memberId)
+        public async Task<List<Models.Action>> GetActionsOfMember(string memberId, string Token)
         {
             string url = BaseUrl + "/members/" + memberId + "/actions" + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -52,7 +49,33 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
-        public async Task<Member> Update(string memberId, Models.Member memberToUpdate)
+        public async Task<Member> GetCurrentInfo(string Token)
+        {
+            string url = BaseUrl + "/members/me?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var mem = JsonConvert.DeserializeObject<Member>(content);
+            return mem;
+        }
+
+        public async Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token)
+        {
+            string url = BaseUrl + "/members/" + memberId + "/organizations" + "?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var tasks = JsonConvert.DeserializeObject<List<Organization>>(content);
+            return tasks;
+        }
+
+        public async Task<Member> Update(string memberId, Models.Member memberToUpdate, string Token)
         {
             string url = BaseUrl + "/members/" + memberId + "?key=" + AppKey + "&token=" + Token;
             var taskUpdate = JsonConvert.SerializeObject(memberToUpdate);

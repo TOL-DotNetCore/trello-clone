@@ -17,19 +17,16 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
         private readonly string AppKey;
-        private readonly string Token;
         private readonly IConfiguration _config;
 
         public LabelService(HttpClient client, IConfiguration config)
         {
             _client = client;
             _config = config;
-            var ConsumerKey = _config.GetValue<string>("Trello:ConsumerKey");
-            AppKey = ConsumerKey;
-            Token = TrelloAuthorizationController.OAuthToken;
+            AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
 
-        public async Task<Label> Create(string idBoard, string name, string color)
+        public async Task<Label> Create(string idBoard, string name, string color, string Token)
         {
             string url = BaseUrl + "/labels?key=" + AppKey + "&token=" + Token + "&name=" + name + "&color=" + color + "&idBoard=" + idBoard;
             var httpResponse = await _client.PostAsync(url, null);
@@ -42,7 +39,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return task;
         }
 
-        public async Task Delete(string id)
+        public async Task Delete(string id, string Token)
         {
             string url = BaseUrl + "/labels/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.DeleteAsync(url);
@@ -52,7 +49,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             }
         }
 
-        public async Task<Label> Get(string id)
+        public async Task<Label> Get(string id, string Token)
         {
             string url = BaseUrl + "/label/" + id + "?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -65,7 +62,7 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return label;
         }
 
-        public async Task<Label> Update(string id, Label task)
+        public async Task<Label> Update(string id, Label task, string Token)
         {
             var url = BaseUrl + "/labels/" + id + "?key=" + AppKey + "&token=" + Token;
             var content = JsonConvert.SerializeObject(task);

@@ -1,10 +1,3 @@
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.csproj.AssemblyReference.cache
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.GeneratedMSBuildEditorConfig.editorconfig
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.AssemblyInfoInputs.cache
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.AssemblyInfo.cs
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.csproj.CoreCompileInputs.cache
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.MvcApplicationPartsAssemblyInfo.cs
-E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.MvcApplicationPartsAssemblyInfo.cache
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\appsettings.json
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\trello-clone.api.exe
@@ -19,6 +12,13 @@ E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\OAuth
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\.NET\API\trello-clone-solution\trello-clone.api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.csproj.AssemblyReference.cache
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.GeneratedMSBuildEditorConfig.editorconfig
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.AssemblyInfoInputs.cache
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.AssemblyInfo.cs
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.csproj.CoreCompileInputs.cache
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.MvcApplicationPartsAssemblyInfo.cs
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.MvcApplicationPartsAssemblyInfo.cache
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\staticwebassets\trello-clone.api.StaticWebAssets.Manifest.cache
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\staticwebassets\trello-clone.api.StaticWebAssets.xml
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\scopedcss\bundle\trello-clone.api.styles.css

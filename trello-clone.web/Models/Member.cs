@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace trello_clone.web.Models
+{
+    public class MarketingOptIn
+    {
+        public bool optedIn { get; set; }
+        public DateTime date { get; set; }
+    }
+
+    public class MessagesDismissed
+    {
+        public string _id { get; set; }
+        public string name { get; set; }
+        public int count { get; set; }
+        public DateTime lastDismissed { get; set; }
+    }
+
+    public class Privacy
+    {
+        public string fullName { get; set; }
+        public string avatar { get; set; }
+    }
+
+    public class TotalPerMember
+    {
+        public string status { get; set; }
+        public int disableAt { get; set; }
+        public int warnAt { get; set; }
+    }
+
+    public class Boards
+    {
+        public TotalPerMember totalPerMember { get; set; }
+    }
+
+    public class Orgs
+    {
+        public TotalPerMember totalPerMember { get; set; }
+    }
+
+
+    public class Member
+    {
+        public string id { get; set; }
+        public string bio { get; set; }
+        public object bioData { get; set; }
+        public bool confirmed { get; set; }
+        public string memberType { get; set; }
+        public string username { get; set; }
+        public string aaId { get; set; }
+        public bool activityBlocked { get; set; }
+        public string avatarHash { get; set; }
+        public string avatarUrl { get; set; }
+        public string fullName { get; set; }
+        public object idEnterprise { get; set; }
+        public List<object> idEnterprisesDeactivated { get; set; }
+        public object idMemberReferrer { get; set; }
+        public List<object> idPremOrgsAdmin { get; set; }
+        public string initials { get; set; }
+        public NonPublic nonPublic { get; set; }
+        public bool nonPublicAvailable { get; set; }
+        public List<object> products { get; set; }
+        public string url { get; set; }
+        public string status { get; set; }
+        public object aaBlockSyncUntil { get; set; }
+        public object aaEmail { get; set; }
+        public object aaEnrolledDate { get; set; }
+        public string avatarSource { get; set; }
+        public int credentialsRemovedCount { get; set; }
+        public object domainClaimed { get; set; }
+        public string email { get; set; }
+        public string gravatarHash { get; set; }
+        public List<string> idBoards { get; set; }
+        public List<string> idOrganizations { get; set; }
+        public List<object> idEnterprisesAdmin { get; set; }
+        public List<string> loginTypes { get; set; }
+        public MarketingOptIn marketingOptIn { get; set; }
+        public List<MessagesDismissed> messagesDismissed { get; set; }
+        public List<string> oneTimeMessagesDismissed { get; set; }
+        public Prefs prefs { get; set; }
+        public List<object> trophies { get; set; }
+        public object uploadedAvatarHash { get; set; }
+        public object uploadedAvatarUrl { get; set; }
+        public List<object> premiumFeatures { get; set; }
+        public bool isAaMastered { get; set; }
+        public string ixUpdate { get; set; }
+        public Limits limits { get; set; }
+    }
+
+
+}

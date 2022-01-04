@@ -23,93 +23,93 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{cardId}", Name = "GetCard")]
-        public async Task<Models.Card> GetCardById(string cardId)
+        public async Task<Models.Card> GetCardById(string cardId, string Token)
         {
-            var task = await _cardservice.GetCardAsync(cardId);
+            var task = await _cardservice.GetCardAsync(cardId, Token);
             return task;
         }
 
         [HttpPost("listId={idList}")]
-        public async Task<Models.Card> Create([FromBody] Card cardToCreate, string idList)
+        public async Task<Models.Card> Create([FromBody] Card cardToCreate, string idList, string Token)
         {
-            var task = await _cardservice.CreateCardAsync(cardToCreate, idList);
+            var task = await _cardservice.CreateCardAsync(cardToCreate, idList, Token);
             return task;
         }
 
         [HttpPut("{cardId}")]
-        public async Task<Card> UpdateCard([FromBody] Card cardToUpdate, string cardId)
+        public async Task<Card> UpdateCard([FromBody] Card cardToUpdate, string cardId, string Token)
         {
-            return await _cardservice.UpdateCardAsync(cardToUpdate, cardId);
+            return await _cardservice.UpdateCardAsync(cardToUpdate, cardId, Token);
         }
 
         [HttpDelete("{cardId}")]
-        public async Task DeleteCard(string cardId)
+        public async Task DeleteCard(string cardId, string Token)
         {
-            await _cardservice.DeleteCardAsync(cardId);
+            await _cardservice.DeleteCardAsync(cardId, Token);
 
         }
 
         [HttpGet("{cardId}/actions")]
-        public async Task<Models.Action> GetACtionOnCard(string cardId)
+        public async Task<Models.Action> GetACtionOnCard(string cardId, string Token)
         {
-            var task = await _cardservice.GetActionOnCard(cardId);
+            var task = await _cardservice.GetActionOnCard(cardId, Token);
             return task;
         }
 
         [HttpGet("{cardId}/board")]
-        public async Task<Models.Board> GetBoardCardIsOn(string cardId)
+        public async Task<Models.Board> GetBoardCardIsOn(string cardId, string Token)
         {
-            var task = await _cardservice.GetBoardCardIsOn(cardId);
+            var task = await _cardservice.GetBoardCardIsOn(cardId, Token);
             return task;
         }
 
         [HttpGet("{cardId}/checkitems")]
-        public async Task<List<Models.CheckItem>> GetChekcItemsOnTheCard(string cardId)
+        public async Task<List<Models.CheckItem>> GetChekcItemsOnTheCard(string cardId, string Token)
         {
-            var task = await _cardservice.GetCheckItemsOnTheCard(cardId);
+            var task = await _cardservice.GetCheckItemsOnTheCard(cardId, Token);
             return task;
         }
 
         [HttpGet("{cardId}/checklists")]
-        public async Task<List<Models.Checklist>> GetChekcListsOnTheCard(string cardId)
+        public async Task<List<Models.Checklist>> GetChekcListsOnTheCard(string cardId, string Token)
         {
-            var task = await _cardservice.GetCheckListsOnTheCard(cardId);
+            var task = await _cardservice.GetCheckListsOnTheCard(cardId, Token);
             return task;
         }
 
         [HttpGet("{cardId}/members")]
-        public async Task<List<Models.Member>> GetMembersOfCard(string cardId)
+        public async Task<List<Models.Member>> GetMembersOfCard(string cardId, string Token)
         {
-            var task = await _cardservice.GetMembersOfCards(cardId);
+            var task = await _cardservice.GetMembersOfCards(cardId, Token);
             return task;
         }
 
         // Attachment
         [HttpGet("{cardId}/attachments")]
-        public async Task<List<Attachment>> GetAttachmentsOnACard(string cardId)
+        public async Task<List<Attachment>> GetAttachmentsOnACard(string cardId, string Token)
         {
-            var tasks = await _cardservice.GetAttachmentsOnACard(cardId);
+            var tasks = await _cardservice.GetAttachmentsOnACard(cardId, Token);
             return tasks;
         }
 
         [HttpGet("{cardId}/attachments/{attachmentId}")]
-        public async Task<Attachment> GetAttachmentsOnACard(string cardId, string attachmentId)
+        public async Task<Attachment> GetAttachmentsOnACard(string cardId, string attachmentId, string Token)
         {
-            var task = await _cardservice.GetAnAttachment(cardId, attachmentId);
+            var task = await _cardservice.GetAnAttachment(cardId, attachmentId, Token);
             return task;
         }
 
         [HttpPost("{cardId}/attachments")]
-        public async Task<Attachment> CreateAttachment(string cardId, [FromForm] AttachmentCreateRequest request)
+        public async Task<Attachment> CreateAttachment(string cardId, [FromForm] AttachmentCreateRequest request, string Token)
         {
-            var task = await _cardservice.CreateAttachment(cardId, request);
+            var task = await _cardservice.CreateAttachment(cardId, request, Token);
             return task;
         }
 
         [HttpDelete("{cardId}/attachments/{attachmentId}")]
-        public async Task DeleteAttachment(string cardId, string attachmentId)
+        public async Task DeleteAttachment(string cardId, string attachmentId, string Token)
         {
-            await _cardservice.DeleteAttachment(cardId, attachmentId);
+            await _cardservice.DeleteAttachment(cardId, attachmentId, Token);
         }
     }
 }
