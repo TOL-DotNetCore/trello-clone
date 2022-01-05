@@ -16,6 +16,19 @@ namespace trello_clone.web.Services
         {
             _clientFactory = clientFactory;
         }
+
+        public async Task<Board> Create(string nameBoard, string Token)
+        {
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.PostAsync(WC.ApiUrl + "/boards/" + nameBoard + "?Token=" + Token, null);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Board>(jsonString);
+            }
+            return null;
+        }
+
         public async Task<Board> GetBoard(string boardId, string Token)
         {
             var client = _clientFactory.CreateClient();
