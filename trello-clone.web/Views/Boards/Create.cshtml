@@ -1,5 +1,8 @@
 ﻿@model trello_clone.web.Models.Board
 <form method="post" asp-action="Create">
-    <input asp-for="name" type="text">
-    <input type="submit" value="Create">
+  <div class="form-group">
+    <label for="name">Board name</label>
+    <input asp-for="name" type="text" class="form-control" placeholder="Enter board name">
+  </div>
+  <input type="submit" value="Create" class="btn btn-primary">
 </form>
