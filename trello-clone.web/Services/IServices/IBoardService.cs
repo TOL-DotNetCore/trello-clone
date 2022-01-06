@@ -10,5 +10,6 @@ namespace trello_clone.web.Services.IServices
     {
         Task<Board> GetBoard(string boardId, string Token);
         Task<List<List>> GetListsOfBoard(string boardId, string Token);
+        Task<Board> Create(string nameBoard, string Token);
     }
 }

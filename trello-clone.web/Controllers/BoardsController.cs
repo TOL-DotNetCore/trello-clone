@@ -12,6 +12,7 @@ using trello_clone.web.Services.IServices;
 
 namespace trello_clone.web.Controllers
 {
+    [Authorize]
     public class BoardsController : Controller
     {
         private readonly IBoardService _boardService;
@@ -19,6 +20,7 @@ namespace trello_clone.web.Controllers
         private readonly IMemberService _memberService;
         private readonly IOrganizationService _orgService;
         private readonly ITrelloTokenService _trelloTokenService;
+        private readonly string trelloToken;
         public BoardsController(IBoardService boardService, IListService listService,
             IOrganizationService orgService,
             IMemberService memberService, ITrelloTokenService trelloTokenService)
@@ -28,45 +30,56 @@ namespace trello_clone.web.Controllers
             _trelloTokenService = trelloTokenService;
             _boardService = boardService;
             _listService = listService;
+            trelloToken = _trelloTokenService.GetToken();
         }
-        [Authorize]
         public async Task<IActionResult> Read(string id)
         {
-            var trelloToken = _trelloTokenService.GetToken();
             var boardInfo = await _boardService.GetBoard(id, trelloToken);
-            ViewBag.BoardInfo = boardInfo;
+            //ViewBag.BoardInfo = boardInfo;
 
-            var listsOfBoard = await _boardService.GetListsOfBoard(id, trelloToken);
-            ViewBag.ListsOfBoard = listsOfBoard;
+            //var listsOfBoard = await _boardService.GetListsOfBoard(id, trelloToken);
+            //ViewBag.ListsOfBoard = listsOfBoard;
 
-            List<List<Card>> lstCards = new List<List<Card>>();
-            foreach(var item in listsOfBoard) {
-                var cardsOfList = await _listService.GetCardsOfList(item.id, trelloToken);
-                lstCards.Add(cardsOfList);
-            }
-            ViewBag.LstCards = lstCards;
-            
+            //List<List<Card>> lstCards = new List<List<Card>>();
+            //foreach (var item in listsOfBoard) {
+            //    var cardsOfList = await _listService.GetCardsOfList(item.id, trelloToken);
+            //    lstCards.Add(cardsOfList);
+            //}
+            //ViewBag.LstCards = lstCards;
+
+            ViewBag.BoardId = boardInfo.id;
+            ViewBag.Token = trelloToken;
             return View();
         }
 
-        [Authorize]
         [HttpGet()]
         public async Task<IActionResult> Index() {
-            var trelloToken = _trelloTokenService.GetToken();
             var me = await _memberService.GetCurrentInfo(trelloToken);
-
 
             var allOrg = await _memberService.GetOrganizationsOfMember(me.id, trelloToken);
             ViewBag.Organizations = allOrg;
 
             var allBoards = new List<List<Board>>();
-            foreach(var org in allOrg)
+            foreach (var org in allOrg)
             {
                 var allBoardsOfOrg = await _orgService.GetBoardsOfOrg(org.id, trelloToken);
                 allBoards.Add(allBoardsOfOrg);
             }
             ViewBag.AllBoards = allBoards;
             return View();
-        } 
+        }
+
+        // Create board
+        [HttpGet()]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost()]
+        public async Task<IActionResult> Create(Board obj)
+        {
+            await _boardService.Create(obj.name, trelloToken);
+            return RedirectToAction("Index");
+        }
     }
 }
