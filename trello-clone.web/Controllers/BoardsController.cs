@@ -35,18 +35,20 @@ namespace trello_clone.web.Controllers
         public async Task<IActionResult> Read(string id)
         {
             var boardInfo = await _boardService.GetBoard(id, trelloToken);
-            ViewBag.BoardInfo = boardInfo;
+            //ViewBag.BoardInfo = boardInfo;
 
-            var listsOfBoard = await _boardService.GetListsOfBoard(id, trelloToken);
-            ViewBag.ListsOfBoard = listsOfBoard;
+            //var listsOfBoard = await _boardService.GetListsOfBoard(id, trelloToken);
+            //ViewBag.ListsOfBoard = listsOfBoard;
 
-            List<List<Card>> lstCards = new List<List<Card>>();
-            foreach (var item in listsOfBoard) {
-                var cardsOfList = await _listService.GetCardsOfList(item.id, trelloToken);
-                lstCards.Add(cardsOfList);
-            }
-            ViewBag.LstCards = lstCards;
+            //List<List<Card>> lstCards = new List<List<Card>>();
+            //foreach (var item in listsOfBoard) {
+            //    var cardsOfList = await _listService.GetCardsOfList(item.id, trelloToken);
+            //    lstCards.Add(cardsOfList);
+            //}
+            //ViewBag.LstCards = lstCards;
 
+            ViewBag.BoardId = boardInfo.id;
+            ViewBag.Token = trelloToken;
             return View();
         }
 

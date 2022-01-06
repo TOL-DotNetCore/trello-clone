@@ -78,6 +78,7 @@ E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\stati
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\staticwebassets\trello-clone.api.StaticWebAssets.xml
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\scopedcss\bundle\trello-clone.api.styles.css
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.RazorTargetAssemblyInfo.cache
+E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.csproj.CopyComplete
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.dll
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.pdb
 E:\.NET\API\trello-clone-solution\trello-clone.api\obj\Debug\netcoreapp3.1\trello-clone.api.genruntimeconfig.cache

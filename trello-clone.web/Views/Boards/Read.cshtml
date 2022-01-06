@@ -185,7 +185,7 @@
 </div>
 
 <div id="root">
-    @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
+    @* @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
     {
         <div class="todoList">
             <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
@@ -200,27 +200,31 @@
 
             </div>
         </div>
-    }
+    } *@
+    <input type="hidden" value=@ViewBag.ListsOfBoard>
 
 </div>
-
-<script>
+<script type="text/javascript">
     let root = document.getElementById("root");
 
 
     class todoList {
-        constructor(place, title = "to-do list") {
+        constructor(place, id, title = "to-do list") {
 
             this.place = place;
             this.title = title;
             this.cardArray = [];
-
+            this.id = id;
             this.render();
         }
 
         addToDo() {
             let text = this.input.value;
             this.cardArray.push(new Card(text, this.div, this));
+        }
+
+        addToDo(nameCard, idCard) {
+            this.cardArray.push(new Card(nameCard, idCard, this.div, this));
         }
 
         render() {
@@ -255,12 +259,13 @@
             this.todoListElement.append(this.button);
             this.todoListElement.append(this.div);
             this.todoListElement.classList.add("todoList");
+            this.todoListElement.id = this.id;
         }
     }
 
 
     class Card {
-        constructor(text, place, todoList) {
+        constructor(text, id, place, todoList) {
 
             this.place = place;
             this.todoList = todoList;
@@ -269,12 +274,14 @@
                 description: "Click to write a description...",
                 comments: []
             }
+            this.id = id;
             this.render();
         }
 
         render() {
             this.card = document.createElement('div');
             this.card.classList.add("card");
+            this.card.id = this.id;
             this.card.addEventListener('click', (e) => {
                 if (e.target != this.deleteButton) {
                     this.showMenu.call(this);
@@ -465,6 +472,7 @@
 
 
     //-------------main------------
+    const API_URL = "https://localhost:44395";
 
     let addTodoListInput = document.getElementById("addTodoListInput");
     let addTodoListButton = document.getElementById("addTodoListButton");
@@ -475,8 +483,42 @@
             addTodoListInput.value = "";
         }
     });
+    @{
+        var boardId = ViewBag.BoardId;
+        var token = ViewBag.Token; 
 
+    }
+    async function fetchLists(boardId = "@boardId") {
+        var url = API_URL + "/api/Boards/"+ boardId +"/lists?Token=" + "@token";
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch(error) {
+            console.log(error);  
+        }
+    }
 
-    @*
-        let todoList1 = new todoList(root); *@
+    async function fetchCards(listId) {
+        var url = API_URL + "/api/lists/"+ listId +"/cards?Token=" + "@token";
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch(error) {
+            console.log(error);  
+        }
+    }
+
+    async function showBoard() {
+        var lists = await fetchLists();
+        var lenList = lists.length;
+        for(var i =0; i < lenList; i++) {
+            let tdList = new todoList(root, lists[i].id, lists[i].name);
+            let cards = await fetchCards(lists[i].id);
+            cards.forEach(card => {
+                tdList.addToDo(card.name, card.id);
+            })
+        }
+    }
+    showBoard();
+    
 </script>
