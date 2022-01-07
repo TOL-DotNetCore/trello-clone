@@ -37,6 +37,7 @@ namespace trello_clone.web.Services
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Organization>>(jsonString);
+               
             }
             return null;
         }
