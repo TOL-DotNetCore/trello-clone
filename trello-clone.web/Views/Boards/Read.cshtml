@@ -178,6 +178,14 @@
         margin-top: 0.5em;
 
     }
+
+    @* Move card *@
+    .sideRight {
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+        float: right;
+    }
 </style>
 @* HTML *@
 <div id="addTodoListDiv">
@@ -204,8 +212,11 @@
 
         addToDo() {
             let text = this.input.value;
-            var card = createCardFetch(this.id, { "name": text });
-            this.cardArray.push(new Card(text, card.id, this.div, this));
+            @* Need to feed *@
+            var cardPromise = createCardFetch(this.id, { "name": text });
+            var cardId = "";
+            cardPromise.then(x => {cardId = x.id});
+            this.cardArray.push(new Card(text, cardId, this.div, this));
         }
 
         addToDoWithName(nameCard, idCard) {
@@ -306,6 +317,8 @@
             this.commentsButton = document.createElement('button');
             this.menuComments = document.createElement("div");
 
+            this.sideRight = document.createElement("div")
+
 
             //Add class names
             this.menu.className = "menu";
@@ -315,10 +328,12 @@
             this.menuComments.className = "menuComments";
             this.commentsInput.className = "commentsInput comment";
             this.commentsButton.className = "commentsButton btn-save";
+            this.sideRight.className = "sideRight";
 
             //Add inner Text
             this.commentsButton.innerText = "Add";
             this.commentsInput.placeholder = "Write a comment...";
+            this.sideRight.innerText = 'Move card';
 
             //Event listeners
             this.menuContainer.addEventListener('click', (e) => {
@@ -342,6 +357,8 @@
             this.menu.append(this.commentsInput);
             this.menu.append(this.commentsButton);
             this.menu.append(this.menuComments);
+            
+            this.menu.append(this.sideRight);
             this.menuContainer.append(this.menu);
             root.append(this.menuContainer);
 
@@ -512,13 +529,32 @@
     }
 
     // NEED to FIX it and fix create card API
-    async function createCardFetch(listId, card) {
+    @* async function createCardFetch(listId, card) {
         var url = API_URL + "/api/cards/listid=" + listId + "?Token=" + "@token";
         const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(card)
+        });
+        return response.json();
+    } *@
+    async function createCardFetch(listId, card) {
+        var url = "https://api.trello.com/1/cards?idList=" + listId + "&key=07e57a8c0ff7205b8202479a1d9ed50d" + "&token=" + "@token";
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(card)
         });
         return response.json();
