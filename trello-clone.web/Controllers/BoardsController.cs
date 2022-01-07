@@ -43,9 +43,9 @@ namespace trello_clone.web.Controllers
 
         [HttpGet()]
         public async Task<IActionResult> Index() {
-            var me = await _memberService.GetCurrentInfo(trelloToken);
-
-            var allOrg = await _memberService.GetOrganizationsOfMember(me.id, trelloToken);
+            MemberGetInfo me = await _memberService.GetCurrentInfo(trelloToken);
+            string userId = me.id;
+            var allOrg = await _memberService.GetOrganizationsOfMember(userId, trelloToken);
             ViewBag.Organizations = allOrg;
 
             var allBoards = new List<List<Board>>();

@@ -9,6 +9,6 @@ namespace trello_clone.web.Services.IServices
     public interface IMemberService
     {
         Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token);
-        Task<Member> GetCurrentInfo(string Token);
+        Task<MemberGetInfo> GetCurrentInfo(string Token);
     }
 }

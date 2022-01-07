@@ -1,7 +1,11 @@
-﻿@{ string bgImg = "";
-    try {
-     bgImg = @ViewBag.BoardInfo.prefs.backgroundImage;
-    } catch {
+﻿@{
+    string bgImg = "";
+    try
+    {
+        bgImg = @ViewBag.BoardInfo.prefs.backgroundImage;
+    }
+    catch
+    {
         bgImg = "https://i.pinimg.com/736x/2f/60/6a/2f606ad14bf9171e5f41b42a01b4441f.jpg";
     }
 
@@ -31,7 +35,7 @@
 
     #addTodoListDiv {
         margin-left: 2em;
-        margin-top: 4em;
+        margin-bottom: -18px;
     }
 
     #addTodoListDiv button {
@@ -43,7 +47,7 @@
         margin: 10px;
         /*border: 1px solid grey;*/
         /*display: flex;*/
-        @*min-width:1200px;*@width: 3000px;
+    @*min-width:1200px;*@width: 3000px;
     }
 
 
@@ -176,17 +180,14 @@
     }
 </style>
 @* HTML *@
-
 <div id="addTodoListDiv">
     <input id="addTodoListInput" class="comment">
-    <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
-
+    <button id="addTodoListButton" class="btn-save">Add list</button>
 </div>
-
 <div id="root">
-    <input type="hidden" value=@ViewBag.ListsOfBoard>
 
 </div>
+
 <script type="text/javascript">
     let root = document.getElementById("root");
 
@@ -203,7 +204,7 @@
 
         addToDo() {
             let text = this.input.value;
-            var card = createCardFetch(this.id, {"name" : text});
+            var card = createCardFetch(this.id, { "name": text });
             this.cardArray.push(new Card(text, card.id, this.div, this));
         }
 
@@ -365,14 +366,14 @@
     }
 
     class EditableText {
-        constructor(text, place, card, property, typeOfInput, typeOfEdit="") {
+        constructor(text, place, card, property, typeOfInput, typeOfEdit = "") {
             this.typeOfEdit = typeOfEdit;
             this.text = text;
             this.place = place;
             this.card = card;
             this.property = property;
             this.typeOfInput = typeOfInput;
-            
+
             this.render();
         }
 
@@ -415,8 +416,8 @@
             function clickSaveButton(event, object, typeOfEdit, cardId, text) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
-                    if(typeOfEdit == "editCard") {
-                        updateCardAsync(cardId, {"name" : text});
+                    if (typeOfEdit == "editCard") {
+                        updateCardAsync(cardId, { "name": text });
                     }
                     // Cancel the default action, if needed
                     event.preventDefault();
@@ -427,7 +428,7 @@
 
             this.input.addEventListener("keyup", (e) => {
                 if (this.typeOfInput == "input") {
-                    clickSaveButton(e, this, this.typeOfEdit,this.card.id, this.input.value);
+                    clickSaveButton(e, this, this.typeOfEdit, this.card.id, this.input.value);
                 }
             });
 
@@ -510,7 +511,7 @@
         }
     }
 
-// NEED to FIX it and fix create card API
+    // NEED to FIX it and fix create card API
     async function createCardFetch(listId, card) {
         var url = API_URL + "/api/cards/listid=" + listId + "?Token=" + "@token";
         const response = await fetch(url, {
@@ -540,7 +541,7 @@
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
-            headers: {'Content-type': 'application/json; charset=UTF-8'},
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
             body: JSON.stringify(card)
         });
         return response.json();

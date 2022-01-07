@@ -17,14 +17,15 @@ namespace trello_clone.web.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<Member> GetCurrentInfo(string Token)
+        // Get current user login information
+        public async Task<MemberGetInfo> GetCurrentInfo(string Token)
         {
             var client = _clientFactory.CreateClient();
             HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/members/me?Token=" + Token);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Member>(jsonString);
+                return JsonConvert.DeserializeObject<MemberGetInfo>(jsonString);
             }
             return null;
         }
