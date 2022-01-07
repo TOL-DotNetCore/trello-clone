@@ -1,12 +1,21 @@
-﻿<style>
+﻿@{ string bgImg = "";
+    try {
+     bgImg = @ViewBag.BoardInfo.prefs.backgroundImage;
+    } catch {
+        bgImg = "https://i.pinimg.com/736x/2f/60/6a/2f606ad14bf9171e5f41b42a01b4441f.jpg";
+    }
+
+}
+<style>
     * {
         padding: 0;
         margin: 0;
     }
 
     body {
-        /*background-color: rgb(30, 30, 95);*/
-        background-color: rgb(43, 43, 83);
+        background-image: url("@bgImg");
+        background-repeat: repeat-x;
+        background-size: cover;
         font-family: "Open Sans";
     }
 
@@ -166,17 +175,8 @@
 
     }
 </style>
-@* @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@* HTML *@
 
-    <h1>Name Board: @ViewBag.BoardInfo.name</h1>
-    @foreach (var item in ViewBag.ListsOfBoard)
-    {
-    @item.name
-    <br />
-    } *@
 <div id="addTodoListDiv">
     <input id="addTodoListInput" class="comment">
     <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
@@ -184,22 +184,6 @@
 </div>
 
 <div id="root">
-    @* @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
-        {
-        <div class="todoList">
-        <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
-        id="to-do-list-button">Add</button>
-        <div>
-        @foreach (var card in @ViewBag.LstCards[i])
-        {
-        <div class="card">
-        <p>@card.name</p><button>X</button>
-        </div>
-        }
-
-        </div>
-        </div>
-        } *@
     <input type="hidden" value=@ViewBag.ListsOfBoard>
 
 </div>
