@@ -360,8 +360,8 @@
             this.menuContainer.append(this.menu);
             root.append(this.menuContainer);
 
-            this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
-            this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
+            this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea", "editDescription");
+            this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input", "editCard");
 
             this.renderComments();
         }
@@ -381,12 +381,14 @@
     }
 
     class EditableText {
-        constructor(text, place, card, property, typeOfInput) {
+        constructor(text, place, card, property, typeOfInput, typeOfEdit="") {
+            this.typeOfEdit = typeOfEdit;
             this.text = text;
             this.place = place;
             this.card = card;
             this.property = property;
             this.typeOfInput = typeOfInput;
+            
             this.render();
         }
 
@@ -426,9 +428,12 @@
                 this.render();
             });
 
-            function clickSaveButton(event, object) {
+            function clickSaveButton(event, object, typeOfEdit, cardId, text) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
+                    if(typeOfEdit == "editCard") {
+                        updateCardAsync(cardId, {"name" : text});
+                    }
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
@@ -438,7 +443,7 @@
 
             this.input.addEventListener("keyup", (e) => {
                 if (this.typeOfInput == "input") {
-                    clickSaveButton(e, this);
+                    clickSaveButton(e, this, this.typeOfEdit,this.card.id, this.input.value);
                 }
             });
 
@@ -542,6 +547,19 @@
             cache: 'no-cache',
             credentials: 'same-origin',
         });
+    }
+
+    async function updateCardAsync(cardId, card) {
+        var url = API_URL + "/api/cards/" + cardId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {'Content-type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify(card)
+        });
+        return response.json();
     }
 
     showBoard();
