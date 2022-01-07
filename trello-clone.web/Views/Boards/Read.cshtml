@@ -34,8 +34,7 @@
         margin: 10px;
         /*border: 1px solid grey;*/
         /*display: flex;*/
-        @* min-width: 1200px; *@
-        width: 3000px;
+        @*min-width:1200px;*@width: 3000px;
     }
 
 
@@ -186,21 +185,21 @@
 
 <div id="root">
     @* @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
-    {
+        {
         <div class="todoList">
-            <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
-            id="to-do-list-button">Add</button>
-            <div>
-                @foreach (var card in @ViewBag.LstCards[i])
-                {
-                    <div class="card">
-                        <p>@card.name</p><button>X</button>
-                    </div>
-                }
-
-            </div>
+        <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
+        id="to-do-list-button">Add</button>
+        <div>
+        @foreach (var card in @ViewBag.LstCards[i])
+        {
+        <div class="card">
+        <p>@card.name</p><button>X</button>
         </div>
-    } *@
+        }
+
+        </div>
+        </div>
+        } *@
     <input type="hidden" value=@ViewBag.ListsOfBoard>
 
 </div>
@@ -220,10 +219,11 @@
 
         addToDo() {
             let text = this.input.value;
-            this.cardArray.push(new Card(text, this.div, this));
+            var card = createCardFetch(this.id, {"name" : text});
+            this.cardArray.push(new Card(text, card.id, this.div, this));
         }
 
-        addToDo(nameCard, idCard) {
+        addToDoWithName(nameCard, idCard) {
             this.cardArray.push(new Card(nameCard, idCard, this.div, this));
         }
 
@@ -304,6 +304,7 @@
         }
 
         deleteCard() {
+            deleteCardAsync(this.id);
             this.card.remove();
             let i = this.todoList.cardArray.indexOf(this);
             this.todoList.cardArray.splice(i, 1);
@@ -485,40 +486,64 @@
     });
     @{
         var boardId = ViewBag.BoardId;
-        var token = ViewBag.Token; 
+        var token = ViewBag.Token;
 
     }
-    async function fetchLists(boardId = "@boardId") {
-        var url = API_URL + "/api/Boards/"+ boardId +"/lists?Token=" + "@token";
-        try {
-            let res = await fetch(url);
-            return await res.json();
-        } catch(error) {
-            console.log(error);  
+        async function fetchLists(boardId = "@boardId") {
+            var url = API_URL + "/api/Boards/" + boardId + "/lists?Token=" + "@token";
+            try {
+                let res = await fetch(url);
+                return await res.json();
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
 
     async function fetchCards(listId) {
-        var url = API_URL + "/api/lists/"+ listId +"/cards?Token=" + "@token";
+        var url = API_URL + "/api/lists/" + listId + "/cards?Token=" + "@token";
         try {
             let res = await fetch(url);
             return await res.json();
-        } catch(error) {
-            console.log(error);  
+        } catch (error) {
+            console.log(error);
         }
     }
 
     async function showBoard() {
         var lists = await fetchLists();
         var lenList = lists.length;
-        for(var i =0; i < lenList; i++) {
+        for (var i = 0; i < lenList; i++) {
             let tdList = new todoList(root, lists[i].id, lists[i].name);
             let cards = await fetchCards(lists[i].id);
             cards.forEach(card => {
-                tdList.addToDo(card.name, card.id);
+                tdList.addToDoWithName(card.name, card.id);
             })
         }
     }
+
+// NEED to FIX it and fix create card API
+    async function createCardFetch(listId, card) {
+        var url = API_URL + "/api/cards/listid=" + listId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            body: JSON.stringify(card)
+        });
+        return response.json();
+    }
+
+    async function deleteCardAsync(cardId) {
+        var url = API_URL + "/api/cards/" + cardId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'DELETE',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+        });
+    }
+
     showBoard();
-    
+
 </script>
