@@ -69,3 +69,98 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* My Edit
+---------------------------------------------------------- */
+.navbar {
+    background-color: #026AA7;
+}
+
+.navbar-brand {
+    font-size: 16px;
+    margin-right: 0;
+    border-radius: 4px;
+}
+
+    .nav-item:hover, .navbar-brand:hover {
+        background-color: #b2d7ff46;
+    }
+
+.nav-item {
+    position: relative;
+    border-radius: 4px;
+}
+
+.nav-link, .navbar-brand {
+    padding: 4px 1.25rem;
+}
+
+.dropdown-menu {
+    top: calc(100% + 8px);
+    width: 300px;
+}
+
+/* Card item */
+.card-list {
+    list-style: none;
+    padding: 0;
+}
+
+.card-list-item {
+    margin-bottom: 12px;
+}
+
+.card-list-link {
+    display: block;
+    text-decoration: none !important;
+    color: #333;
+    padding: 0px 4px;
+}
+
+    .card-list-link:hover {
+        background-color: #ccc;
+    }
+
+.card-item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+    .card-item img {
+        height: 100%;
+        display: block;
+    }
+
+.card-item__info {
+    overflow: hidden;
+    font-weight: 500;
+    margin-left: 12px;
+    margin-bottom: 0;
+}
+
+/* User manager */
+.action {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.user-manager {
+    margin-left: 12px;
+}
+
+    .user-manager img {
+        height: 35px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+.user-manager-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.user-manager .dropdown-menu {
+    left: -270px;
+}

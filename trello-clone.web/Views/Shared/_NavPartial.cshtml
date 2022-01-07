@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using trello_clone.web.Services.IServices
+@inject SignInManager<IdentityUser> SignInManager
+@inject IMemberService memService
+@inject ITrelloTokenService trelloTokenService
+
+<a class="navbar-brand" asp-controller="Home" asp-action="Index">
+    <i class="fab fa-trello"></i>
+    Trello
+</a>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href=# class="nav-link text-white dropdown-toggle" id="SpaceMenu" role="button" data-toggle="dropdown" aria-expanded="false">Các không gian làm việc</a>
+            <!-- Dropdown menu -->
+        <div class="dropdown-menu" aria-labelledby="SpaceMenu">
+                <div class="container d-block">
+                    <header class="dropdown-menu__header text-center">
+                        Các không gian làm việc
+                        <hr>
+                    </header>
+                    <div class="dropdown-menu__content">
+                        <ul class="card-list">
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">Không gian 1</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">Không gian 2</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">Không gian 3</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href=# class="nav-link text-white dropdown-toggle" id="UsedMenu" role="button" data-toggle="dropdown" aria-expanded="false">Gần đây</a>
+            <!-- Dropdown menu -->
+        <div class="dropdown-menu" aria-labelledby="UsedMenu">
+                <div class="container d-block">
+                    <header class="dropdown-menu__header text-center">
+                        Gần đây
+                        <hr>
+                    </header>
+                    <div class="dropdown-menu__content">
+                        <ul class="card-list">
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">1</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">2</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">3</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href=# class="nav-link text-white dropdown-toggle" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Đã đánh dấu sao</a>
+            <!-- Dropdown menu -->
+        <div class="dropdown-menu" aria-labelledby="MarkStartMenu">
+                <div class="container d-block">
+                    <header class="dropdown-menu__header text-center">
+                        Đã đánh dấu sao
+                        <hr>
+                    </header>
+                    <div class="dropdown-menu__content">
+                        <ul class="card-list">
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">1</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">2</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="card-list-item">
+                                <a class="card-list-link" href="#">
+                                    <div class="card-item">
+                                        <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                        <p class="card-item__info">3</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href=# class="nav-link text-white" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Tạo mới</a>
+            <div class="dropdown-menu " aria-labelledby="CreateNewMenu">
+                <a class="dropdown-item" asp-controller="Boards" asp-action="Create">Tạo Bảng</a>
+                <a class="dropdown-item" href="#">Tạo Không gian làm việc</a>
+            </div>
+        </li>
+    </ul>
+}
