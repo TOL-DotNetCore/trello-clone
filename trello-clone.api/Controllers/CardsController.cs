@@ -115,5 +115,13 @@ namespace todoist_red_gate.Controllers
         {
             await _cardservice.DeleteAttachment(cardId, attachmentId, Token);
         }
+
+        // Comments
+        [HttpPost("{cardId}/comments")]
+        public async Task<Models.Action> CreateComment(string cardId, string text, string Token)
+        {
+            var comment = await _cardservice.CreateComment(cardId, text, Token);
+            return comment;
+        }
     }
 }

@@ -24,6 +24,9 @@ namespace todoist_red_gate.Services
         Task<Attachment> CreateAttachment(string cardId, AttachmentCreateRequest request, string Token);
         Task DeleteAttachment(string cardId, string attachmentId, string Token);
 
+        // Comment
+        Task<Models.Action> CreateComment(string cardId, string text, string Token); 
+
     }
 }
 

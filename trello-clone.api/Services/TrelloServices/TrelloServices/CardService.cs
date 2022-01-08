@@ -196,5 +196,18 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             //return createdTask;
             throw new NotImplementedException();
         }
+
+        public async Task<Models.Action> CreateComment(string cardId, string text, string Token)
+        {
+            string url = BaseUrl + "/cards/" + cardId + "/actions/comments?text=" + text + "&key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.PostAsync(url, null);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot create comment");
+            }
+            string jsonString = await httpResponse.Content.ReadAsStringAsync();
+            var res = JsonConvert.DeserializeObject<Models.Action>(jsonString);
+            return res;
+        }
     }
 }

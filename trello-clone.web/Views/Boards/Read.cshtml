@@ -153,7 +153,9 @@
         font-size: 1.1em;
     }
 
-
+    .menuComments {
+        width: 200px;
+    }
 
     .comment {
         background-color: white;
@@ -221,6 +223,10 @@
             let text = this.input.value;
             var card = await createCardFetch(this.id, { "name": text });
             this.cardArray.push(new Card(text, card.id, this.div, this));
+        }
+
+        moveTodo(card, toList) {
+            console.log("move");
         }
 
         addToDoWithName(nameCard, idCard) {
@@ -365,10 +371,9 @@
             this.menu.append(this.menuDescription);
             this.menu.append(this.commentsInput);
             this.menu.append(this.commentsButton);
-            this.menu.append(this.menuComments);
-            
             this.menu.append(this.sideRight);
             this.sideRight.innerHTML = listString;
+            this.menu.append(this.menuComments);
 
             this.menuContainer.append(this.menu);
             root.append(this.menuContainer);
