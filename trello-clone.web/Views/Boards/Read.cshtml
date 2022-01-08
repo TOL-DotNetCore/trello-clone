@@ -198,7 +198,14 @@
 
 <script type="text/javascript">
     let root = document.getElementById("root");
+    const API_URL = "https://localhost:44395";
+    @{
+            
+        var boardId = ViewBag.BoardId;
+        var token = ViewBag.Token;
 
+    }
+    
 
     class todoList {
         constructor(place, id, title = "to-do list") {
@@ -210,13 +217,10 @@
             this.render();
         }
 
-        addToDo() {
+        async addToDo() {
             let text = this.input.value;
-            @* Need to feed *@
-            var cardPromise = createCardFetch(this.id, { "name": text });
-            var cardId = "";
-            cardPromise.then(x => {cardId = x.id});
-            this.cardArray.push(new Card(text, cardId, this.div, this));
+            var card = await createCardFetch(this.id, { "name": text });
+            this.cardArray.push(new Card(text, card.id, this.div, this));
         }
 
         addToDoWithName(nameCard, idCard) {
@@ -306,7 +310,7 @@
             this.todoList.cardArray.splice(i, 1);
         }
 
-        showMenu() {
+        async showMenu() {
 
             //Create elements
             this.menu = document.createElement("div");
@@ -318,7 +322,13 @@
             this.menuComments = document.createElement("div");
 
             this.sideRight = document.createElement("div")
-
+            var LISTS = await fetchLists();
+            let listString = "Move card to:</br><a>";
+            for(var i =0; i<LISTS.length; i++) {
+                listString += LISTS[i].name + "</br>";
+            }
+            listString += "</a>";
+            
 
             //Add class names
             this.menu.className = "menu";
@@ -333,7 +343,6 @@
             //Add inner Text
             this.commentsButton.innerText = "Add";
             this.commentsInput.placeholder = "Write a comment...";
-            this.sideRight.innerText = 'Move card';
 
             //Event listeners
             this.menuContainer.addEventListener('click', (e) => {
@@ -359,6 +368,8 @@
             this.menu.append(this.menuComments);
             
             this.menu.append(this.sideRight);
+            this.sideRight.innerHTML = listString;
+
             this.menuContainer.append(this.menu);
             root.append(this.menuContainer);
 
@@ -480,7 +491,6 @@
 
 
     //-------------main------------
-    const API_URL = "https://localhost:44395";
 
     let addTodoListInput = document.getElementById("addTodoListInput");
     let addTodoListButton = document.getElementById("addTodoListButton");
@@ -491,20 +501,16 @@
             addTodoListInput.value = "";
         }
     });
-    @{
-        var boardId = ViewBag.BoardId;
-        var token = ViewBag.Token;
 
-    }
-        async function fetchLists(boardId = "@boardId") {
-            var url = API_URL + "/api/Boards/" + boardId + "/lists?Token=" + "@token";
-            try {
-                let res = await fetch(url);
-                return await res.json();
-            } catch (error) {
-                console.log(error);
-            }
+    async function fetchLists(boardId = "@boardId") {
+        var url = API_URL + "/api/Boards/" + boardId + "/lists?Token=" + "@token";
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch (error) {
+            console.log(error);
         }
+    }
 
     async function fetchCards(listId) {
         var url = API_URL + "/api/lists/" + listId + "/cards?Token=" + "@token";
@@ -517,11 +523,11 @@
     }
 
     async function showBoard() {
-        var lists = await fetchLists();
-        var lenList = lists.length;
+        var LISTS = await fetchLists();
+        var lenList = LISTS.length;
         for (var i = 0; i < lenList; i++) {
-            let tdList = new todoList(root, lists[i].id, lists[i].name);
-            let cards = await fetchCards(lists[i].id);
+            let tdList = new todoList(root, LISTS[i].id, LISTS[i].name);
+            let cards = await fetchCards(LISTS[i].id);
             cards.forEach(card => {
                 tdList.addToDoWithName(card.name, card.id);
             })
