@@ -30,10 +30,14 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpPost("listId={idList}")]
-        public async Task<Models.Card> Create([FromBody] Card cardToCreate, string idList, string Token)
+        public async Task<IActionResult> Create([FromBody] Card cardToCreate, string idList, string Token)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var task = await _cardservice.CreateCardAsync(cardToCreate, idList, Token);
-            return task;
+            return Ok(task);
         }
 
         [HttpPut("{cardId}")]
@@ -50,7 +54,7 @@ namespace todoist_red_gate.Controllers
         }
 
         [HttpGet("{cardId}/actions")]
-        public async Task<Models.Action> GetACtionOnCard(string cardId, string Token)
+        public async Task<Models.Action> GetActionOnCard(string cardId, string Token)
         {
             var task = await _cardservice.GetActionOnCard(cardId, Token);
             return task;

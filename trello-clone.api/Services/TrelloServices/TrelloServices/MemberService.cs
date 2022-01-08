@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using todoist_red_gate.Controllers;
 using todoist_red_gate.Models;
 using todoist_red_gate.Services.TrelloServices.ITrelloServices;
 
@@ -49,7 +48,8 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
-        public async Task<Member> GetCurrentInfo(string Token)
+        // Get current user
+        public async Task<MemberGetInfo> GetCurrentInfo(string Token)
         {
             string url = BaseUrl + "/members/me?key=" + AppKey + "&token=" + Token;
             var httpResponse = await _client.GetAsync(url);
@@ -58,8 +58,8 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
                 throw new Exception("Cannot retrieve task");
             }
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var mem = JsonConvert.DeserializeObject<Member>(content);
-            return mem;
+            var mem = JsonConvert.DeserializeObject<dynamic>(content);
+            return new MemberGetInfo() { id = mem.id, username = mem.username, avatarUrl = mem.avatarUrl};
         }
 
         public async Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token)

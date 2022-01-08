@@ -47,10 +47,11 @@ namespace todoist_red_gate.Controllers
             return tasks;
         }
 
+        // Get current user loggin infomation
         [HttpGet("me")]
-        public async Task<Member> GetCurrentInfo(string Token)
+        public async Task<MemberGetInfo> GetCurrentInfo(string Token)
         {
-            var res = await _memberService.GetCurrentInfo(Token);
+            MemberGetInfo res = await _memberService.GetCurrentInfo(Token);
             return res;
         }
     }

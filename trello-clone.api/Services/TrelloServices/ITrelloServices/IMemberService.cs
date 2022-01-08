@@ -8,7 +8,7 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
 {
     public interface IMemberService
     {
-        Task<Member> GetCurrentInfo(string Token);
+        Task<MemberGetInfo> GetCurrentInfo(string Token);
         Task<Models.Member> Get(string memberId, string Token);
         Task<Models.Member> Update(string memberId, Models.Member memberToUpdate, string Token);
         Task<List<Models.Action>> GetActionsOfMember(string memberId, string Token);

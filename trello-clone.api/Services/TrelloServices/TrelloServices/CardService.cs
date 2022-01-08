@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using todoist_red_gate.Controllers;
@@ -14,27 +15,31 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
     {
         private const string BaseUrl = "https://api.trello.com/1";
         private readonly HttpClient _client;
+        private readonly IHttpClientFactory _clientFactory;
         private readonly string AppKey;
         private readonly IConfiguration _config;
 
-        public CardService(HttpClient client, IConfiguration config)
+        public CardService(HttpClient client, IHttpClientFactory clientFactory, IConfiguration config)
         {
+            _clientFactory = clientFactory;
             _client = client;
             _config = config;
             AppKey = _config.GetValue<string>("Trello:ConsumerKey");
         }
-        public async Task<Card> CreateCardAsync(Card task, string idList, string Token)
+        public async Task<Card> CreateCardAsync(Card obj, string idList, string Token)
         {
 
-            var content = JsonConvert.SerializeObject(task);
             string url = BaseUrl + "/cards?key=" + AppKey + "&token=" + Token + "&idList=" + idList;
-            var httpResponse = await _client.PostAsync(url, new StringContent(content, Encoding.UTF8, "application/json"));
-            if (!httpResponse.IsSuccessStatusCode)
+            using (var request = new HttpRequestMessage(new HttpMethod("POST"), url))
             {
-                throw new Exception("Can not add card " + httpResponse.StatusCode);
+                var content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+                request.Content = content;
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+
+                var response = await _client.SendAsync(request);
+                string jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Card>(jsonString);
             }
-            var createdTask = JsonConvert.DeserializeObject<Card>(await httpResponse.Content.ReadAsStringAsync());
-            return createdTask;
         }
         public async Task DeleteCardAsync(string id, string Token)
         {

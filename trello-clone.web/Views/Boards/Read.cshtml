@@ -1,12 +1,25 @@
-﻿<style>
+﻿@{
+    string bgImg = "";
+    try
+    {
+        bgImg = @ViewBag.BoardInfo.prefs.backgroundImage;
+    }
+    catch
+    {
+        bgImg = "https://i.pinimg.com/736x/2f/60/6a/2f606ad14bf9171e5f41b42a01b4441f.jpg";
+    }
+
+}
+<style>
     * {
         padding: 0;
         margin: 0;
     }
 
     body {
-        /*background-color: rgb(30, 30, 95);*/
-        background-color: rgb(43, 43, 83);
+        background-image: url("@bgImg");
+        background-repeat: repeat-x;
+        background-size: cover;
         font-family: "Open Sans";
     }
 
@@ -22,7 +35,7 @@
 
     #addTodoListDiv {
         margin-left: 2em;
-        margin-top: 4em;
+        margin-bottom: -18px;
     }
 
     #addTodoListDiv button {
@@ -34,8 +47,7 @@
         margin: 10px;
         /*border: 1px solid grey;*/
         /*display: flex;*/
-        @* min-width: 1200px; *@
-        width: 3000px;
+    @*min-width:1200px;*@width: 3000px;
     }
 
 
@@ -166,47 +178,34 @@
         margin-top: 0.5em;
 
     }
-</style>
-@* @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    }
 
-    <h1>Name Board: @ViewBag.BoardInfo.name</h1>
-    @foreach (var item in ViewBag.ListsOfBoard)
-    {
-    @item.name
-    <br />
-    } *@
+    @* Move card *@
+    .sideRight {
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+        float: right;
+    }
+</style>
+@* HTML *@
 <div id="addTodoListDiv">
     <input id="addTodoListInput" class="comment">
-    <button id="addTodoListButton" class="btn-save">Add new to-do list</button>
-
+    <button id="addTodoListButton" class="btn-save">Add list</button>
 </div>
-
 <div id="root">
-    @* @for (int i = 0; i < ViewBag.ListsOfBoard.Count; i++)
-    {
-        <div class="todoList">
-            <h2>@ViewBag.ListsOfBoard[i].name</h2><input class="comment"><button class="btn-save"
-            id="to-do-list-button">Add</button>
-            <div>
-                @foreach (var card in @ViewBag.LstCards[i])
-                {
-                    <div class="card">
-                        <p>@card.name</p><button>X</button>
-                    </div>
-                }
-
-            </div>
-        </div>
-    } *@
-    <input type="hidden" value=@ViewBag.ListsOfBoard>
 
 </div>
+
 <script type="text/javascript">
     let root = document.getElementById("root");
+    const API_URL = "https://localhost:44395";
+    @{
+            
+        var boardId = ViewBag.BoardId;
+        var token = ViewBag.Token;
 
+    }
+    
 
     class todoList {
         constructor(place, id, title = "to-do list") {
@@ -218,12 +217,13 @@
             this.render();
         }
 
-        addToDo() {
+        async addToDo() {
             let text = this.input.value;
-            this.cardArray.push(new Card(text, this.div, this));
+            var card = await createCardFetch(this.id, { "name": text });
+            this.cardArray.push(new Card(text, card.id, this.div, this));
         }
 
-        addToDo(nameCard, idCard) {
+        addToDoWithName(nameCard, idCard) {
             this.cardArray.push(new Card(nameCard, idCard, this.div, this));
         }
 
@@ -304,12 +304,13 @@
         }
 
         deleteCard() {
+            deleteCardAsync(this.id);
             this.card.remove();
             let i = this.todoList.cardArray.indexOf(this);
             this.todoList.cardArray.splice(i, 1);
         }
 
-        showMenu() {
+        async showMenu() {
 
             //Create elements
             this.menu = document.createElement("div");
@@ -320,6 +321,14 @@
             this.commentsButton = document.createElement('button');
             this.menuComments = document.createElement("div");
 
+            this.sideRight = document.createElement("div")
+            var LISTS = await fetchLists();
+            let listString = "Move card to:</br><a>";
+            for(var i =0; i<LISTS.length; i++) {
+                listString += LISTS[i].name + "</br>";
+            }
+            listString += "</a>";
+            
 
             //Add class names
             this.menu.className = "menu";
@@ -329,6 +338,7 @@
             this.menuComments.className = "menuComments";
             this.commentsInput.className = "commentsInput comment";
             this.commentsButton.className = "commentsButton btn-save";
+            this.sideRight.className = "sideRight";
 
             //Add inner Text
             this.commentsButton.innerText = "Add";
@@ -356,11 +366,15 @@
             this.menu.append(this.commentsInput);
             this.menu.append(this.commentsButton);
             this.menu.append(this.menuComments);
+            
+            this.menu.append(this.sideRight);
+            this.sideRight.innerHTML = listString;
+
             this.menuContainer.append(this.menu);
             root.append(this.menuContainer);
 
-            this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
-            this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
+            this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea", "editDescription");
+            this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input", "editCard");
 
             this.renderComments();
         }
@@ -380,12 +394,14 @@
     }
 
     class EditableText {
-        constructor(text, place, card, property, typeOfInput) {
+        constructor(text, place, card, property, typeOfInput, typeOfEdit = "") {
+            this.typeOfEdit = typeOfEdit;
             this.text = text;
             this.place = place;
             this.card = card;
             this.property = property;
             this.typeOfInput = typeOfInput;
+
             this.render();
         }
 
@@ -425,9 +441,12 @@
                 this.render();
             });
 
-            function clickSaveButton(event, object) {
+            function clickSaveButton(event, object, typeOfEdit, cardId, text) {
                 // Number 13 is the "Enter" key on the keyboard
                 if (event.keyCode === 13) {
+                    if (typeOfEdit == "editCard") {
+                        updateCardAsync(cardId, { "name": text });
+                    }
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
@@ -437,7 +456,7 @@
 
             this.input.addEventListener("keyup", (e) => {
                 if (this.typeOfInput == "input") {
-                    clickSaveButton(e, this);
+                    clickSaveButton(e, this, this.typeOfEdit, this.card.id, this.input.value);
                 }
             });
 
@@ -472,7 +491,6 @@
 
 
     //-------------main------------
-    const API_URL = "https://localhost:44395";
 
     let addTodoListInput = document.getElementById("addTodoListInput");
     let addTodoListButton = document.getElementById("addTodoListButton");
@@ -483,42 +501,94 @@
             addTodoListInput.value = "";
         }
     });
-    @{
-        var boardId = ViewBag.BoardId;
-        var token = ViewBag.Token; 
 
-    }
     async function fetchLists(boardId = "@boardId") {
-        var url = API_URL + "/api/Boards/"+ boardId +"/lists?Token=" + "@token";
+        var url = API_URL + "/api/Boards/" + boardId + "/lists?Token=" + "@token";
         try {
             let res = await fetch(url);
             return await res.json();
-        } catch(error) {
-            console.log(error);  
+        } catch (error) {
+            console.log(error);
         }
     }
 
     async function fetchCards(listId) {
-        var url = API_URL + "/api/lists/"+ listId +"/cards?Token=" + "@token";
+        var url = API_URL + "/api/lists/" + listId + "/cards?Token=" + "@token";
         try {
             let res = await fetch(url);
             return await res.json();
-        } catch(error) {
-            console.log(error);  
+        } catch (error) {
+            console.log(error);
         }
     }
 
     async function showBoard() {
-        var lists = await fetchLists();
-        var lenList = lists.length;
-        for(var i =0; i < lenList; i++) {
-            let tdList = new todoList(root, lists[i].id, lists[i].name);
-            let cards = await fetchCards(lists[i].id);
+        var LISTS = await fetchLists();
+        var lenList = LISTS.length;
+        for (var i = 0; i < lenList; i++) {
+            let tdList = new todoList(root, LISTS[i].id, LISTS[i].name);
+            let cards = await fetchCards(LISTS[i].id);
             cards.forEach(card => {
-                tdList.addToDo(card.name, card.id);
+                tdList.addToDoWithName(card.name, card.id);
             })
         }
     }
+
+    // NEED to FIX it and fix create card API
+    @* async function createCardFetch(listId, card) {
+        var url = API_URL + "/api/cards/listid=" + listId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(card)
+        });
+        return response.json();
+    } *@
+    async function createCardFetch(listId, card) {
+        var url = "https://api.trello.com/1/cards?idList=" + listId + "&key=07e57a8c0ff7205b8202479a1d9ed50d" + "&token=" + "@token";
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(card)
+        });
+        return response.json();
+    }
+
+    async function deleteCardAsync(cardId) {
+        var url = API_URL + "/api/cards/" + cardId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'DELETE',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+        });
+    }
+
+    async function updateCardAsync(cardId, card) {
+        var url = API_URL + "/api/cards/" + cardId + "?Token=" + "@token";
+        const response = await fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            body: JSON.stringify(card)
+        });
+        return response.json();
+    }
+
     showBoard();
-    
+
 </script>

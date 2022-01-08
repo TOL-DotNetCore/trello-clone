@@ -7,6 +7,7 @@
   }
 
   .board-item {
+    position: relative;
     border-radius: 10px;
     margin: 0 2% 2% 0;
     padding: 0;
@@ -32,6 +33,9 @@
   }
 
   .board-item a {
+    position: absolute;
+    top: 6px;
+    left: 5px;
     border-radius: 10px;
     display: block;
     width: 100%;
@@ -40,6 +44,8 @@
     color: white;
     text-align: left;
     padding: 8px;
+    z-index: 0;
+    
   }
 
   .add-board {
@@ -47,6 +53,15 @@
   }
   .add-board input {
     margin-left: 10px;
+  }
+
+  .imgBgBoard {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: 1;
   }
 </style>
 <div class="container">
@@ -71,7 +86,9 @@
             <li class="board-item">
               @{
                 string nameBoard = ViewBag.AllBoards[i][j].name;
+                string imgBgBoard = ViewBag.AllBoards[i][j].prefs.backgroundImage;
               }
+              <img class="imgBgBoard" src="@imgBgBoard" alt="">
               @Html.ActionLink(nameBoard, "read", new { id = @ViewBag.AllBoards[i][j].id})
             </li>
           }
