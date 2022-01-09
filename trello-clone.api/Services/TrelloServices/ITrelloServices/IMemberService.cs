@@ -13,5 +13,7 @@ namespace todoist_red_gate.Services.TrelloServices.ITrelloServices
         Task<Models.Member> Update(string memberId, Models.Member memberToUpdate, string Token);
         Task<List<Models.Action>> GetActionsOfMember(string memberId, string Token);
         Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token);
+
+        Task<List<BoardStar>> GetBoardStarsOfMember(string memberId, string Token);
     }
 }

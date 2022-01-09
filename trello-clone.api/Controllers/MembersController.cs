@@ -19,6 +19,13 @@ namespace todoist_red_gate.Controllers
             _memberService = memberService;
         }
 
+        [HttpGet("{memberId}/boardStars")]
+        public async Task<List<BoardStar>> GetBoardStarsOfMember(string memberId, string Token)
+        {
+            var boardStars = await _memberService.GetBoardStarsOfMember(memberId, Token);
+            return boardStars;
+        }
+
         [HttpGet("{memberId}")]
         public async Task<Models.Member> Get(string memberId, string Token)
         {

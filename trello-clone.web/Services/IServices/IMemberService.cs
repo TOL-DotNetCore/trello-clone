@@ -10,5 +10,7 @@ namespace trello_clone.web.Services.IServices
     {
         Task<List<Organization>> GetOrganizationsOfMember(string memberId, string Token);
         Task<MemberGetInfo> GetCurrentInfo(string Token);
+
+        Task<List<BoardStar>> GetBoardStarsOfMeber(string memberId, string Token);
     }
 }

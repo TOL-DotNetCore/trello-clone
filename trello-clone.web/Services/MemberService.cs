@@ -17,6 +17,18 @@ namespace trello_clone.web.Services
             _clientFactory = clientFactory;
         }
 
+        public async Task<List<BoardStar>> GetBoardStarsOfMeber(string memberId, string Token)
+        {
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.GetAsync(WC.ApiUrl + "/members/" + memberId + "/boardStars?Token=" + Token);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<BoardStar>>(jsonString);
+            }
+            return null;
+        }
+
         // Get current user login information
         public async Task<MemberGetInfo> GetCurrentInfo(string Token)
         {
@@ -42,5 +54,7 @@ namespace trello_clone.web.Services
             }
             return null;
         }
+
+
     }
 }
