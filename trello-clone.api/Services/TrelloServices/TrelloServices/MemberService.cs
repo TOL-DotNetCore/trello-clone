@@ -48,6 +48,20 @@ namespace todoist_red_gate.Services.TrelloServices.TrelloServices
             return tasks;
         }
 
+        public async Task<List<BoardStar>> GetBoardStarsOfMember(string memberId, string Token)
+        {
+            string url = BaseUrl + "/members/" + memberId + "/boardStars" + "?key=" + AppKey + "&token=" + Token;
+            var httpResponse = await _client.GetAsync(url);
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Cannot retrieve task");
+            }
+            var content = await httpResponse.Content.ReadAsStringAsync();
+            var boardStart = JsonConvert.DeserializeObject<List<BoardStar>>(content);
+            return boardStart;
+
+        }
+
         // Get current user
         public async Task<MemberGetInfo> GetCurrentInfo(string Token)
         {
