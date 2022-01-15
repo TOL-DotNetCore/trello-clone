@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "trello-clone.web/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "3.7.7.13",
           "Microsoft.AspNetCore.Authentication.Facebook": "5.0.0",
           "Microsoft.AspNetCore.Authentication.Google": "5.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.12",
@@ -323,6 +324,31 @@
         },
         "compile": {
           "trello-clone.web.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.5.15": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.5.15"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
+        }
+      },
+      "AWSSDK.S3/3.7.7.13": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.5.15"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.7.13"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -3619,6 +3645,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.5.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uQFWmiXhz706tt3ziAIbUmhDkuxdK5v318pdx/i4Jjl/S3dvSMNgEhd5NjZlf5/N1vuq8kVAKOyil8DdJpmVNw==",
+      "path": "awssdk.core/3.7.5.15",
+      "hashPath": "awssdk.core.3.7.5.15.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.7.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J5yO33IdZQqnb4Tjj7b7bxKsLneYqgMU0ha9drNTyOz1A7C8DE0Zv70l/OBiGQC1ct5/JcOm9ctXD5uu0XlX4A==",
+      "path": "awssdk.s3/3.7.7.13",
+      "hashPath": "awssdk.s3.3.7.7.13.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

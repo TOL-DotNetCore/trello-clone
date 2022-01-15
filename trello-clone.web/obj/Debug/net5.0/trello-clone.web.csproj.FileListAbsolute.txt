@@ -203,3 +203,5 @@ E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\ref\trello-c
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone.web.pdb
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone.web.genruntimeconfig.cache
 E:\.NET\API\trello-clone-solution\trello-clone.web\obj\Debug\net5.0\trello-clone.web.csproj.AssemblyReference.cache
+E:\.NET\API\trello-clone-solution\trello-clone.web\bin\Debug\net5.0\AWSSDK.Core.dll
+E:\.NET\API\trello-clone-solution\trello-clone.web\bin\Debug\net5.0\AWSSDK.S3.dll

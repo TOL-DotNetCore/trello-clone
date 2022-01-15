@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using trello_clone.web.Services.IServices;
 
 namespace trello_clone.web.Areas.Identity.Pages.Account.Manage
 {
@@ -13,13 +15,15 @@ namespace trello_clone.web.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IApplicationUserService _appUserService;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager, IApplicationUserService appUserService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _appUserService = appUserService;
         }
 
         public string Username { get; set; }
@@ -35,6 +39,7 @@ namespace trello_clone.web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public IFormFile File { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -86,6 +91,9 @@ namespace trello_clone.web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            await _appUserService.UploadAvatar(Input.File, user.Id);
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
