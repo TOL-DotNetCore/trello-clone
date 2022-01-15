@@ -12,83 +12,95 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+
     var token = @trelloTokenService.GetToken();
-    var mem = await @memService.GetCurrentInfo(token);
-    var organizations = await @memService.GetOrganizationsOfMember(mem.id, token);
-    var boardStars = await @memService.GetBoardStarsOfMeber(mem.id, token);
+    if (token == "")
+    {
+<h6>
+    Bạn chưa kết nối đến trello, <input class="" type="button"
+                                        value="Kết nối trello"
+                                        onclick="location.href='@Url.Action("login", "TrelloAuthorization" )'" />
+</h6>
+    }
+    else
+    {
+        var mem = await @memService.GetCurrentInfo(token);
+        var organizations = await @memService.GetOrganizationsOfMember(mem.id, token);
+        var boardStars = await @memService.GetBoardStarsOfMeber(mem.id, token);
 
 
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href=# class="nav-link text-white dropdown-toggle" id="SpaceMenu" role="button" data-toggle="dropdown" aria-expanded="false">Các không gian làm việc</a>
-            <!-- Dropdown menu -->
-            <div class="dropdown-menu" aria-labelledby="SpaceMenu">
-                <div class="container d-block">
-                    <header class="dropdown-menu__header text-center">
-                        Các không gian làm việc
-                        <hr>
-                    </header>
-                    <div class="dropdown-menu__content">
-                        <ul class="card-list">
-                            @foreach (var org in organizations)
-                            {
-                                <li class="card-list-item">
-                                    <a class="card-list-link" href="#">
-                                        <div class="card-item">
-                                            <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
-                                            <p class="card-item__info">@org.displayName</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href=# class="nav-link text-white dropdown-toggle" id="SpaceMenu" role="button" data-toggle="dropdown" aria-expanded="false">Các không gian làm việc</a>
+                <!-- Dropdown menu -->
+                <div class="dropdown-menu" aria-labelledby="SpaceMenu">
+                    <div class="container d-block">
+                        <header class="dropdown-menu__header text-center">
+                            Các không gian làm việc
+                            <hr>
+                        </header>
+                        <div class="dropdown-menu__content">
+                            <ul class="card-list">
+                                @foreach (var org in organizations)
+                                {
+                                    <li class="card-list-item">
+                                        <a class="card-list-link" href="#">
+                                            <div class="card-item">
+                                                <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                                <p class="card-item__info">@org.displayName</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a href=# class="nav-link text-white dropdown-toggle" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Đã đánh dấu sao</a>
-            <!-- Dropdown menu -->
-        <div class="dropdown-menu" aria-labelledby="MarkStartMenu">
-                <div class="container d-block">
-                    <header class="dropdown-menu__header text-center">
-                        Đã đánh dấu sao
-                        <hr>
-                    </header>
-                    <div class="dropdown-menu__content">
-                        <ul class="card-list">
-                            @if (boardStars.Count <= 0)
-                            {
-                                <p>Không có bảng đánh dấu sao</p>
-                            }
+            </li>
+            <li class="nav-item">
+                <a href=# class="nav-link text-white dropdown-toggle" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Đã đánh dấu sao</a>
+                <!-- Dropdown menu -->
+                <div class="dropdown-menu" aria-labelledby="MarkStartMenu">
+                    <div class="container d-block">
+                        <header class="dropdown-menu__header text-center">
+                            Đã đánh dấu sao
+                            <hr>
+                        </header>
+                        <div class="dropdown-menu__content">
+                            <ul class="card-list">
+                                @if (boardStars.Count <= 0)
+                                {
+                                    <p>Không có bảng đánh dấu sao</p>
+                                }
 
-                            @foreach (var boardStar in boardStars)
-                            {
-                                var board = await boardService.GetBoard(boardStar.idBoard, token);
+                                @foreach (var boardStar in boardStars)
+                                {
+                                    var board = await boardService.GetBoard(boardStar.idBoard, token);
 
-                                <li class="card-list-item">
-                                    <a class="card-list-link" href="#">
-                                        <div class="card-item">
-                                            <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
-                                            <p class="card-item__info">@board.name</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
+                                    <li class="card-list-item">
+                                        <a class="card-list-link" href="#">
+                                            <div class="card-item">
+                                                <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="avatar">
+                                                <p class="card-item__info">@board.name</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a href=# class="nav-link text-white" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Tạo mới</a>
-            <div class="dropdown-menu " aria-labelledby="CreateNewMenu">
-                <a class="dropdown-item" asp-controller="Boards" asp-action="Create">Tạo Bảng</a>
-                <a class="dropdown-item" href="#">Tạo Không gian làm việc</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a asp-action="Index" asp-controller="boards" class="nav-link text-white" role="button">Boards</a>
-        </li>
-    </ul>
+            </li>
+            <li class="nav-item">
+                <a href=# class="nav-link text-white" id="MarkStartMenu" role="button" data-toggle="dropdown" aria-expanded="false">Tạo mới</a>
+                <div class="dropdown-menu " aria-labelledby="CreateNewMenu">
+                    <a class="dropdown-item" asp-controller="Boards" asp-action="Create">Tạo Bảng</a>
+                    <a class="dropdown-item" href="#">Tạo Không gian làm việc</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Index" asp-controller="boards" class="nav-link text-white" role="button">Boards</a>
+            </li>
+        </ul>
+    }
 }

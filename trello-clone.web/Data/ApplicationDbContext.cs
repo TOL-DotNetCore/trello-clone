@@ -9,7 +9,7 @@ using trello_clone.web.Entities;
 
 namespace trello_clone.web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -22,5 +22,6 @@ namespace trello_clone.web.Data
         }
 
         public DbSet<TrelloToken> TrelloTokens { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

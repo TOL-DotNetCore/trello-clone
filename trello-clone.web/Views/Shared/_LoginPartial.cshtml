@@ -3,6 +3,7 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IApplicationUserService _appUserService;
 
 <div class="action">
     @if (SignInManager.IsSignedIn(User))
@@ -13,7 +14,12 @@
         </div>
         <div class="user-manager dropdown">
             <button class="user-manager-btn" type="button" id="userManagerMenu" data-toggle="dropdown" aria-expanded="false">
-                <img src="~/images/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png" alt="user">
+                @{
+                    var id = UserManager.GetUserId(User);
+                    var user = await _appUserService.GetUSer(id);
+                    var avatarUrl = user.Avatar;
+                    }
+                <img src="@avatarUrl" alt="user">
             </button>
 
             <div class="dropdown-menu" aria-labelledby="userManagerMenu">

@@ -97,6 +97,15 @@
                         <input asp-for="Input.Email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
                     </div>
 
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.UserName" placeholder="User name" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
                     <!-- Password -->
                     <div class="input-group col-lg-6 mb-4">
                         <div class="input-group-prepend">
@@ -115,7 +124,7 @@
                             </span>
                         </div>
                         <input asp-for="Input.ConfirmPassword" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
-                        
+
                     </div>
                     <div asp-validation-summary="All" class="text-danger"></div>
 

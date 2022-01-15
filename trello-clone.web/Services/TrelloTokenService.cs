@@ -27,7 +27,9 @@ namespace trello_clone.web.Services
             var trelloToken = (from tk in _db.TrelloTokens
                         where tk.IdentityUser.Id.Equals(userId)
                         select tk).FirstOrDefault();
-            return trelloToken.Token;
+            if(trelloToken != null)
+                return trelloToken.Token;
+            return "";
         }
 
         public void SaveToken(string tlToken)

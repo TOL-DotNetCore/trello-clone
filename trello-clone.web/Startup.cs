@@ -1,3 +1,4 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,7 +36,7 @@ namespace trello_clone.web
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<IOrganizationService, OrganizationService>();
             services.AddScoped<ITrelloTokenService, TrelloTokenService>();
-
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
             services.AddHttpClient();
 
