@@ -67,7 +67,6 @@ namespace todoist_red_gate.Controllers
             return tasks;
         }
 
-        //https://localhost:44395/api/boards/6089796c27952b1ac618b338/weeksumary
         [HttpGet("{boardId}/weeksumary")]
         public async Task<WeekSumary> GetSumaryOfWeek(string boardId, string Token)
         {

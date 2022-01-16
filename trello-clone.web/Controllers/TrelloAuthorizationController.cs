@@ -64,7 +64,7 @@ namespace trello_clone.web.Controllers
             var OauthToken = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token");
             TokenSecret = HttpUtility.ParseQueryString(responseFromServer).Get("oauth_token_secret");
 
-            return Redirect("https://trello.com/1/OAuthAuthorizeToken?oauth_token=" + OauthToken);
+            return Redirect("https://trello.com/1/OAuthAuthorizeToken?oauth_token=" + OauthToken + "&?expiration=1day&scope=read,write");
         }
 
         [HttpGet]
